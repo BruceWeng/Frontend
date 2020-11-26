@@ -17,18 +17,18 @@
 |   |          | 12 | 16. Create an Event Emitter |
 |   |          | 13 | 17. Create a simple store for DOM element |
 |   |          | 14 | 20. Detect data type in JavaScript |
-|   |          | 16 | 22. Implement JSON.parse() |
-|   |          | 17 | 23. Create a sum() |
-|   |          | 18 | 24. Create a Priority Queue in JavaScript |
-|   |          | 19 | 26. Implement Object.assign() |
-|   |          | 20 | 28. Implement clearAllTimeout() |
-|   |          | 21 | 46. Implement _.once() |
-|   |          | 22 | 54. Flatten Thunk |
-|   |          | 23 | 63. Create _.cloneDeep() |
-|   |          | 24 | 69. Implement deep equal _.isEqual() |
-|   |          | 25 | 85. Implement _.get() |
-|   |          | 26 | 122. Implement memoizeOne() |
-|   |          | 27 | 125. Implement classNames() |
+|   |          | 15 | 22. Implement JSON.parse() |
+|   |          | 16 | 23. Create a sum() |
+|   |          | 17 | 24. Create a Priority Queue in JavaScript |
+|   |          | 18 | 26. Implement Object.assign() |
+|   |          | 19 | 28. Implement clearAllTimeout() |
+|   |          | 20 | 46. Implement _.once() |
+|   |          | 21 | 54. Flatten Thunk |
+|   |          | 22 | 63. Create _.cloneDeep() |
+|   |          | 23 | 69. Implement deep equal _.isEqual() |
+|   |          | 24 | 85. Implement _.get() |
+|   |          | 25 | 122. Implement memoizeOne() |
+|   |          | 26 | 125. Implement classNames() |
 | 2 | DOM Maniputation | 1 | 19. Find corresponding node in two identical DOM tree |
 |   |                  | 2 | 58. Get DOM tree height |
 |   |                  | 3 | 68. Get DOM tags |
