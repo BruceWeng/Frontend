@@ -17,7 +17,6 @@
 |   |          | 12 | 16. Create an Event Emitter |
 |   |          | 13 | 17. Create a simple store for DOM element |
 |   |          | 14 | 20. Detect data type in JavaScript |
-|   |          | 15 | 21. Implement JSON.stringify() |
 |   |          | 16 | 22. Implement JSON.parse() |
 |   |          | 17 | 23. Create a sum() |
 |   |          | 18 | 24. Create a Priority Queue in JavaScript |
