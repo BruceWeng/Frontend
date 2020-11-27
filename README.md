@@ -21,14 +21,13 @@
 |   |          | 16 | 23. Create a sum() |
 |   |          | 17 | 24. Create a Priority Queue in JavaScript |
 |   |          | 18 | 26. Implement Object.assign() |
-|   |          | 19 | 28. Implement clearAllTimeout() |
-|   |          | 20 | 46. Implement _.once() |
-|   |          | 21 | 54. Flatten Thunk |
-|   |          | 22 | 63. Create _.cloneDeep() |
-|   |          | 23 | 69. Implement deep equal _.isEqual() |
-|   |          | 24 | 85. Implement _.get() |
-|   |          | 25 | 122. Implement memoizeOne() |
-|   |          | 26 | 125. Implement classNames() |
+|   |          | 19 | 46. Implement _.once() |
+|   |          | 20 | 54. Flatten Thunk |
+|   |          | 21 | 63. Create _.cloneDeep() |
+|   |          | 22 | 69. Implement deep equal _.isEqual() |
+|   |          | 23 | 85. Implement _.get() |
+|   |          | 24 | 122. Implement memoizeOne() |
+|   |          | 25 | 125. Implement classNames() |
 | 2 | DOM Maniputation | 1 | 19. Find corresponding node in two identical DOM tree |
 |   |                  | 2 | 58. Get DOM tree height |
 |   |                  | 3 | 68. Get DOM tags |
@@ -49,11 +48,12 @@
 |   |               | 6 | 67. Create your own Promise |
 |   |               | 7 | 92. Throttle Promises |
 |   |               | 8 | 123. Implement Promise.prototype.finally() |
-| 5 | Timer         | 1 | 36. Create a fake timer (setTimeout) |
-|   |               | 2 | 83. Create an interval |
-|   |               | 3 | 84. Create a fake timer (setInterval) |
-|   |               | 4 | 130. Create LazyMan() |
-|   |               | 5 | Implement a stopwatch |
+| 5 | Timer         | 1 | 28. Implement clearAllTimeout() |
+|   |               | 2 | 36. Create a fake timer (setTimeout) |
+|   |               | 3 | 83. Create an interval |
+|   |               | 4 | 84. Create a fake timer (setInterval) |
+|   |               | 5 | 130. Create LazyMan() |
+|   |               | 6 | Implement a stopwatch |
 | 6 | Testing       | 1 | 38. Implement jest.spyOn() |
 | 7 | Generator     | 1 | 39. Implement range() |
 |   |               | 2 | 119. Create a tokenizer |
