@@ -1,6 +1,5 @@
 # Frontend
-## Frontend fundamental resource
-### Part 1: BFE fundamental
+## Part 1: BFE fundamental
 | # | Category | # | Questions |
 |:-:|:--------:|:-:|-----------|
 | 1 | Utility  | 1 | 1. Implement curry() |
@@ -85,7 +84,7 @@
 |    |              | 7 | 116. Implement Object.is() |
 | 14 | Math         | 1 | 132. The angle between hour hand and minute hand of a clock |
 
-### Part 2: Widget Design
+## Part 2: Widget Design
 | # | Question |
 |:-:|----------|
 | 1 | Carousel |
@@ -103,5 +102,113 @@
 | 13 | Datepicker/timepicker |
 | 14 | Poll |
 
-### Part 3: Performance
+## Part 3: Performance
 
+## part 4: System Design
+### 1. API
+### 2. Async query function:
+```js
+const GetPostList = async () => {
+  const {data} = await axios.get(url: 'http://hostname/api/posts/');
+  return data;
+}
+```
+### 3. Query wrapper: ```useQuery(queryKey[], queryFn)```
+### 4. Component: 
+```js
+function({props}) { 
+  let state = {};
+  return virtualElement;
+}
+```
+### 5. Virtual Element:
+```js
+{
+  key: 'unique key',
+  props: {
+    children: [children node],
+    eventListener: () => {}
+  },
+  ref: 'actual DOM',
+  type: 'ComponentName'
+}
+```
+### 6.1 Client-side State management
+1. Pub/Sub lib
+```ts
+class PubSub {
+  constructor() {
+    this.events = {};
+  }
+  subscribe(event: String, callback: Function): Void
+  publish(event: String, date: Object): Void
+}
+```
+2. Store object
+```ts
+class Store {
+  constructor(params) {
+    this.actions = {};
+    this.status = 'resting';
+    this.events = new PubSub();
+    if (params.hasOwnProperty('actions')) {
+      this.actions = params.actions;
+    }
+    this.state = new Proxy((params.state || {}), {
+      set: function (state, key, value) {
+        state.key = value;
+        this.events.publish('stateChange', this.state);
+        this.status = 'resting';
+        return true;
+      }
+    });
+  }
+  dispatch(actionKey: String, payload: Object): Boolean {
+    if (typeof this.actions.actionKey !== 'function') {
+      return false;
+    }
+    this.status = 'action';
+    this.actions.actionKey(this, payload);
+    return true;
+  }
+}
+```
+### 6.2 Reconciler and linked list:
+1. ```createNodeFromTypeAndProps(virtualElement) => LinkedListNode```
+
+2. ```updateHostComponent(current, workInProgress)```
+
+3. Linked List Node:
+```js
+{
+  stateNode: new ComponentName,
+  type: 'ComponentName',
+  alternate: 'WorkInProgress Node',
+  key: 'unique key',
+  updateQueue: [],
+  memoizedState: {},
+  pendingProps: {
+    children: [children node],
+    eventListener: () => {},
+  },
+  memoizedProps: {
+    children: [children node],
+    eventListener: () => {},
+  },
+  tag: Number,
+  effectTag: Number,
+  nextEffectTag: Number
+}
+```
+4. Phases: 
+    1. Render Phase:
+
+        Run ```updateHostComponent(current, workInProgress)```
+
+    2. Commit Phase:
+
+        Traverse effect list to perform DOM mutation and async request. Start when 
+
+        1. After component mounted
+        2. After component updated
+        3. Before component unmounted
