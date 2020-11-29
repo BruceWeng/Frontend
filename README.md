@@ -33,7 +33,7 @@
 |   |                  | 4 | 89. Next Right Sibling |
 |   |                  | 5 | 104. Traverse DOM level by level |
 |   |                  | 6 | 113. Virtual DOM I |
-|   |                  | 7 | 118. Birtual DOM II - createElement |
+|   |                  | 7 | 118. Virtual DOM II - createElement |
 | 3 | Async Utility | 1 | 29. Implement sequence() |
 |   |               | 2 | 30. Implement parallel() |
 |   |               | 3 | 31. Implement race() |
@@ -103,7 +103,15 @@
 | 14 | Poll |
 
 ## Part 3: Performance
-
+### Metrics:
+1. Time to First Byte (TTFB)
+2. First Paint (FP)
+3. First Contentful Paint (FCP)
+4. First Meaningful Paint (FMP)
+5. Time to Interactive (TTI)
+6. First Input Delay (FID)
+7. Largest Contentful Paint (LCP)
+8. Total Blocking Time (TBT): time between FP and TTI
 ## part 4: System Design
 ### 1. API
 ### 2. Async query function:
@@ -122,8 +130,8 @@ function({props}) {
 }
 ```
 ### 5. Virtual Element:
-```js
-{
+```ts
+interface {
   key: 'unique key',
   props: {
     children: [children node],
@@ -140,8 +148,8 @@ class PubSub {
   constructor() {
     this.events = {};
   }
-  subscribe(event: String, callback: Function): Void
-  publish(event: String, date: Object): Void
+  subscribe(event: string, callback: function): void
+  publish(event: string, date: object): void
 }
 ```
 2. Store object
@@ -163,7 +171,7 @@ class Store {
       }
     });
   }
-  dispatch(actionKey: String, payload: Object): Boolean {
+  dispatch(actionKey: string, payload: object): boolean {
     if (typeof this.actions.actionKey !== 'function') {
       return false;
     }
@@ -179,8 +187,8 @@ class Store {
 2. ```updateHostComponent(current, workInProgress)```
 
 3. Linked List Node:
-```js
-{
+```ts
+interface {
   stateNode: new ComponentName,
   type: 'ComponentName',
   alternate: 'WorkInProgress Node',
@@ -195,9 +203,9 @@ class Store {
     children: [children node],
     eventListener: () => {},
   },
-  tag: Number,
-  effectTag: Number,
-  nextEffectTag: Number
+  tag: number,
+  effectTag: number,
+  nextEffectTag: number
 }
 ```
 4. Phases: 
@@ -212,3 +220,32 @@ class Store {
         1. After component mounted
         2. After component updated
         3. Before component unmounted
+
+Design principles:
+1. Seperation of Concerns
+2. Command-Query separation
+3. Optimized for Change
+
+1. View/component
+2. Functionality/stated-lib
+3. Connection
+  3.1 Long/short polling (client pull):
+  Command/Query warpper + Async request function
+  3.2 WebSockets (server push):
+  WebSocket
+  3.3 Server-Sent events (server push):
+  new EventSource()
+4. Gateway API:
+    Read server
+    Write server
+
+Examples:
+1. Twitter/Facebook/Instagram (User, Post, Friendship, Media)
+2. WhatsApp (Real time Chat service, User, Message, Frinedship, Status, Channel)
+3. Netflix (Real time stream service, Video)
+4. Uber/Yelp (Location based service, Geo, Dispatch)
+5. Airbnb (Hotel booking service, Search, Book)
+6. Robinhood (Real time market data service)
+7. Gmail (Message, Thread, Label, Draft)
+8. Google document (Collaborative editing service, Format, Git, Concurrency)
+9. Youtube (Recomendation, Video)
