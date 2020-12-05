@@ -15,3 +15,22 @@ const findCorrespondingNode = (rootA, rootB, target) => {
   }
   return null
 }
+
+// Iteration solution
+/**
+ * @param {HTMLElement} rootA
+ * @param {HTMLElement} rootB - rootA and rootB are clone of each other
+ * @param {HTMLElement} target
+ */
+const findCorrespondingNode = (rootA, rootB, target) => {
+  const stackA = [rootA]
+  const stackB = [rootB]
+  while (stackA.length > 0) {
+    const topA = stackA.pop()
+    const topB = stackB.pop()
+    if (topA === target) return topB
+    stackA.push(...topA.children)
+    stackB.push(...topB.children)
+  }
+  return null
+}
