@@ -34,6 +34,7 @@
 |   |                  | 5 | 104. Traverse DOM level by level |
 |   |                  | 6 | 113. Virtual DOM I |
 |   |                  | 7 | 118. Virtual DOM II - createElement |
+|   |                  | 8 | 140. Virtual DOM III - Functional Component |
 | 3 | Async Utility | 1 | 29. Implement sequence() |
 |   |               | 2 | 30. Implement parallel() |
 |   |               | 3 | 31. Implement race() |
