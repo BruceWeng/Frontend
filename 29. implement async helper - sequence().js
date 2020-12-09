@@ -13,24 +13,24 @@ type AsyncFunc = (
  * @return {(callback: Callback) => void}
  */
 function sequence(funcs) {
-  return (cb, initData) => {
+  return (callback, initData) => {
     const finalPromise = funcs.reduce((acc, func) => {
       return acc
-      .then(val => makePromise(func, val))
+      .then(data => makePromise(func, data))
       .catch(err => Promise.reject(err));
     }, Promise.resolve(initData));
 
     finalPromise
-    .then(val => cb(undefined, val))
-    .catch(err => cb(err));
+    .then(data => callback(undefined, data))
+    .catch(err => callback(err));
   }
 }
 
-const makePromise = (func, input) => {
+const makePromise = (func, initData) => {
   return new Promise((resolve, reject) => {
     func((err, data) => {
       if (err) reject(err);
       resolve(data);
-    }, input);
+    }, initData);
   })
 }
