@@ -16,13 +16,13 @@ function sequence(funcs) {
   return (cb, initData) => {
     const finalPromise = funcs.reduce((acc, func) => {
       return acc
-        .then(val => makePromise(func, val))
-        .catch(err => Promise.reject(err));
+      .then(val => makePromise(func, val))
+      .catch(err => Promise.reject(err));
     }, Promise.resolve(initData));
 
     finalPromise
-      .then(val => cb(undefined, val))
-      .catch(err => cb(err));
+    .then(val => cb(undefined, val))
+    .catch(err => cb(err));
   }
 }
 
