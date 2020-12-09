@@ -14,10 +14,10 @@ type AsyncFunc = (
  */
 function parallel(funcs) {
   // your code here
-  return function(callback, input) {
-    promiseAll(funcs.map(func => makePromise(func, input)))
+  return function(callback, initData) {
+    promiseAll(funcs.map(func => makePromise(func, initData)))
     .then(data => callback(undefined, data))
-    .catch(err => callback(err, input))
+    .catch(err => callback(err, initData))
   }
 }
 
@@ -29,11 +29,11 @@ function promiseAll(promises) {
   }, Promise.resolve([]));
 }
 
-const makePromise = (func, input) => {
+const makePromise = (func, initData) => {
   return new Promise((resolve, reject) => {
     func((err, data) => {
       if (err) reject(err);
       resolve(data);
-    }, input);
+    }, initData);
   })
 }
