@@ -76,14 +76,6 @@
 |    |              | 3 | 117. Event Delegation |
 |    |              | 4 | 134. Create your own Cookie |
 |    |              | 5 | 135. localStorage with expriration |
-| 13 | JS syntax    | 1 | 60. Create your own new operator |
-|    |              | 2 | 61. Create your own Function.prototype.call |
-|    |              | 3 | 88. Support negative Array index in JavaScript |
-|    |              | 4 | 90. Write your own instanceof |
-|    |              | 5 | 94. Implement your own Object.create() |
-|    |              | 6 | 95. Implement String.prototype.trim() |
-|    |              | 7 | 116. Implement Object.is() |
-| 14 | Math         | 1 | 132. The angle between hour hand and minute hand of a clock |
 
 ## Part 2: Widget Design
 | # | Question |
