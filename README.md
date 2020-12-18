@@ -109,7 +109,8 @@
 ### 2. Async query function:
 ```js
 const GetPostList = async () => {
-  const {data} = await axios.get(url: 'http://hostname/api/posts/');
+  const response = await fetch('http://hostname/api/posts/');
+  const data = await response.json();
   return data;
 }
 ```
@@ -134,44 +135,17 @@ interface {
 }
 ```
 ### 6.1 Client-side State management
-1. Pub/Sub lib
+1. atom: 
 ```ts
-class PubSub {
-  constructor() {
-    this.events = {};
-  }
-  subscribe(event: string, callback: function): void
-  publish(event: string, date: object): void
-}
+const countAtom = atom(0);
+const [count, setCount] = useAtom(countAtom);
 ```
-2. Store object
+2. pipe: 
 ```ts
-class Store {
-  constructor(params) {
-    this.actions = {};
-    this.status = 'resting';
-    this.events = new PubSub();
-    if (params.hasOwnProperty('actions')) {
-      this.actions = params.actions;
-    }
-    this.state = new Proxy((params.state || {}), {
-      set: function (state, key, value) {
-        state.key = value;
-        this.events.publish('stateChange', this.state);
-        this.status = 'resting';
-        return true;
-      }
-    });
-  }
-  dispatch(actionKey: string, payload: object): boolean {
-    if (typeof this.actions.actionKey !== 'function') {
-      return false;
-    }
-    this.status = 'action';
-    this.actions.actionKey(this, payload);
-    return true;
-  }
-}
+const countAtom1 = atom(1);
+const countAtom2 = atom(2);
+
+const countTotalAtom = atom(get => get(countAtom1) + get(countAtom2));
 ```
 ### 6.2 Reconciler and linked list:
 1. ```createNodeFromTypeAndProps(virtualElement) => LinkedListNode```
@@ -219,7 +193,7 @@ Design principles:
 3. Optimized for Change
 
 1. View/component
-2. Functionality/stated-lib
+2. Functionality/jotai
 3. Connection
   3.1 Long/short polling (client pull):
   Command/Query warpper + Async request function
