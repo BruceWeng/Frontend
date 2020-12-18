@@ -54,28 +54,18 @@
 |   |               | 4 | 84. Create a fake timer (setInterval) |
 |   |               | 5 | 130. Create LazyMan() |
 |   |               | 6 | Implement a stopwatch |
-| 6 | Testing       | 1 | 38. Implement jest.spyOn() |
-| 7 | Generator     | 1 | 39. Implement range() |
-|   |               | 2 | 119. Create a tokenizer |
-| 8 | Sorting       | 1 | 40. Bubble Sort |
+| 6 | Sorting       | 1 | 40. Bubble Sort |
 |   |               | 2 | 41. Merge Sort |
 |   |               | 3 | 42. Insertion Sort |
 |   |               | 4 | 43. Quick Sort |
 |   |               | 5 | 44. Selection Sort |
-| 9 | Middleware    | 1 | 52. Create a middleware system |
-| 10 | HTML manipulation | 1 | 55. Highlight keywords in HTML string |
-|    |                   | 2 | 99. Extract all anchor element form HTML string |
-| 11 | Observable   | 1 | 57. Create an Observable |
-|    |              | 2 | 70. Implement Observable.from() |
-|    |              | 3 | 71. Implement Observable Subject |
-|    |              | 4 | 72. Implement Observable interval() |
-|    |              | 5 | 73. Implement Observable fromEvent() |
-|    |              | 6 | 74. Implement Observable Transformation Operators |
-| 12 | Browser      | 1 | 59. Create a browser history |
-|    |              | 2 | 80. Implement your own URLSearchParams |
-|    |              | 3 | 117. Event Delegation |
-|    |              | 4 | 134. Create your own Cookie |
-|    |              | 5 | 135. localStorage with expriration |
+| 7 | HTML manipulation | 1 | 55. Highlight keywords in HTML string |
+|   |                   | 2 | 99. Extract all anchor element form HTML string |
+| 8 | Browser       | 1 | 59. Create a browser history |
+|   |               | 2 | 80. Implement your own URLSearchParams |
+|   |               | 3 | 117. Event Delegation |
+|   |               | 4 | 134. Create your own Cookie |
+|   |               | 5 | 135. localStorage with expriration |
 
 ## Part 2: Widget Design
 | # | Question |
