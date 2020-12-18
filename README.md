@@ -89,11 +89,10 @@
 | 7 | Star rating |
 | 8 | Accordion |
 | 9 | File uploader |
-| 10 | Progress bar |
+| 10 | Download Progress bar |
 | 11 | Autocompolete |
 | 12 | Infinite scroller |
-| 13 | Datepicker/timepicker |
-| 14 | Poll |
+| 13 | Poll |
 
 ## Part 3: Performance
 ### Metrics:
