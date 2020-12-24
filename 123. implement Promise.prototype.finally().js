@@ -4,11 +4,8 @@
  * @returns {Promise<any>}
  */
 function myFinally(promise, onFinally) {
-  return promise.then((value) => {
-    return Promise.resolve(onFinally())
-      .then(() => value);
-  }, (reason) => {
-    return Promise.resolve(onFinally())
-      .then(() => Promise.reject(reason));
-  });
+  return promise.then(
+    value =>  Promise.resolve(onFinally()).then(() => value), 
+    reason => Promise.resolve(onFinally()).then(() => Promise.reject(reason))
+  );
 }
