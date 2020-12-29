@@ -84,16 +84,22 @@
 | 13 | Poll |
 
 ## Part 3: Performance
+![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
+![Devtool-timing](./img/Devtool-timing.png)
+![Map-timing-to-diagram](./img/Map-timing-to-diagram.png)
 ### Metrics:
-1. Time to First Byte (TTFB)
-2. First Paint (FP)
-3. First Contentful Paint (FCP)
-4. First Meaningful Paint (FMP)
-5. Time to Interactive (TTI)
-6. First Input Delay (FID)
-7. Largest Contentful Paint (LCP)
-8. Total Blocking Time (TBT): time between FP and TTI
-## part 4: System Design
+| # | Name | Definition | Measure | Diagnose | Fix |
+|:-:|------|------------|---------|----------|-----|
+| 1 | Time to First Byte (TTFB) | the time between HTTP GET and first byte of response received aka (Wait) | | | |
+| 2 | First Paint (FP) | the time first pixel rendered on the screen (usually background color. JS not ready yet) | | | |
+| 3 | First Contentful Paint (FCP) | the time content from DOM rendered on the screen (text/image/svg) | | | |
+| 4 | First Meaningful Paint (FMP) | the time primary content rendered on the screen(developer defined) | | | |
+| 5 | Time to Interactive (TTI) | the time large JS chunks have finished  | | | |
+| 6 | Total Blocking Time (TBT) | the time between FP and TTI | | | |
+| 7 | Largest Contentful Paint (LCP) | the time largest node rendered (measures loading performance) | | | |
+| 8 | First Input Delay (FID) | (measures interactivity) | only tested in field | | |
+| 9 | Cumulative Layout Shift (CLS) | (measures visual stability) | | | |
+## Part 4: System Design
 ### 1. API
 ### 2. Async query function:
 ```js
