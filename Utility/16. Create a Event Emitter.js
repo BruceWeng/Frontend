@@ -4,10 +4,10 @@ class EventEmitter {
   	this.subscribers[eventName] = this.subscribers[eventName] || [];
     this.subscribers[eventName].push(callback);
     const index = this.subscribers.length - 1;
-    const event_emitter = this;
+    const EventEmitter = this;
     return {
       release() {
-        event_emitter.subscribers[eventName].splice(index, 1);
+        EventEmitter.subscribers[eventName].splice(index, 1);
       }
     }
   }
