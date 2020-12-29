@@ -1,25 +1,21 @@
 class EventEmitter {
-  callbacks = {};
-  map = new WeakMap(); // WeakMap is used when using object as key. When object is deleted, object key in WeakMap will also be garbage collected.
+  subscribers = {};
   subscribe(eventName, callback) {
-    this.callbacks[eventName] = this.callbacks[eventName] || [];
-    this.callbacks[eventName].push(callback);
-    this.map.set(callback, this.callbacks[eventName].length-1);
-    const emitter = this;
+  	this.subscribers[eventName] = this.subscribers[eventName] || [];
+    this.subscribers[eventName].push(callback);
+    const index = this.subscribers.length - 1;
+    const event_emitter = this;
     return {
       release() {
-        if (emitter.map.has(callback)) {
-          emitter.callbacks[eventName].splice(emitter.map.get(callback), 1);
-          emitter.map.delete(callback);
-        }
+        event_emitter.subscribers[eventName].splice(index, 1);
       }
-    };
+    }
   }
-
+  
   emit(eventName, ...args) {
-    const cbs = this.callbacks[eventName] || [];
-    for (const c of cbs) {
-      c(...args);
+  	const callbacks = this.subscribers[eventName];
+    for (const callback of callbacks) {
+      callback(...args);
     }
   }
 }
