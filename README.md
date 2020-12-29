@@ -109,8 +109,9 @@ const GetPostList = async () => {
   return data;
 }
 ```
-### 3. Query wrapper: ```useQuery(queryKey[], queryFn)```
+### 3. Query Promise wrapper: ```useQuery(queryKey['todos', todoId], queryFn)```
 ### 4. Component: 
+```React.createElement(componentName, props: attribute | eventListener, ...children): virtualElement```
 ```js
 function({props}) { 
   let state = {};
@@ -182,7 +183,7 @@ interface {
         2. After component updated
         3. Before component unmounted
 
-Design principles:
+### Design principles:
 1. Seperation of Concerns
 2. Command-Query separation
 3. Optimized for Change
@@ -200,7 +201,7 @@ Design principles:
     Read server
     Write server
 
-Examples:
+### Examples:
 1. Twitter/Facebook/Instagram (User, Post, Friendship, Media)
 2. WhatsApp (Real time Chat service, User, Message, Frinedship, Status, Channel)
 3. Netflix (Real time stream service, Video)
