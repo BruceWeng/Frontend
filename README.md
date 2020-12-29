@@ -27,14 +27,13 @@
 |   |          | 23 | 85. Implement _.get() |
 |   |          | 24 | 122. Implement memoizeOne() |
 |   |          | 25 | 125. Implement classNames() |
-| 2 | DOM Maniputation | 1 | 19. Find corresponding node in two identical DOM tree |
+| 2 | DOM Manipulation | 1 | 19. Find corresponding node in two identical DOM tree |
 |   |                  | 2 | 58. Get DOM tree height |
 |   |                  | 3 | 68. Get DOM tags |
 |   |                  | 4 | 89. Next Right Sibling |
 |   |                  | 5 | 104. Traverse DOM level by level |
 |   |                  | 6 | 113. Virtual DOM I |
 |   |                  | 7 | 118. Virtual DOM II - createElement |
-|   |                  | 8 | 140. Virtual DOM III - Functional Component |
 | 3 | Async Utility | 1 | 29. Implement sequence() |
 |   |               | 2 | 30. Implement parallel() |
 |   |               | 3 | 31. Implement race() |
