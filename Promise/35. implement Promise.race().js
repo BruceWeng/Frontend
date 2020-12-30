@@ -1,4 +1,6 @@
 /**
+ * Promise.race is settled as soon as any of the promises you feed it settle, 
+ * whether they are fulfilled or rejected.
  * @param {Array<Promise>} promises
  * @return {Promise}
  */
