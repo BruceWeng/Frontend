@@ -1,5 +1,5 @@
 class EventEmitter {
-  subscribers = {};
+  subscribers = {}; // <key: eventName, value: callbacks[]>
   subscribe(eventName, callback) {
   	this.subscribers[eventName] = this.subscribers[eventName] || [];
     this.subscribers[eventName].push(callback);
