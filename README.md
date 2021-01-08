@@ -67,21 +67,21 @@
 |   |               | 5 | 135. localStorage with expriration |
 
 ## Part 2: Widget Design
-| # | Question |
-|:-:|----------|
-| 1 | Carousel |
-| 2 | Light out game |
-| 3 | Excel table (calculated cell, sort, filter) |
-| 4 | Todo app CRUD |
-| 5 | Fuzzy search |
-| 6 | Click outside to close drop down |
-| 7 | Star rating |
-| 8 | Accordion |
-| 9 | File uploader |
-| 10 | Download Progress bar |
-| 11 | Autocompolete |
-| 12 | Infinite scroller |
-| 13 | Poll |
+| # | Question | Status |
+|:-:|----------|:------:|
+| 1 | Carousel |  |
+| 2 | Light out game | &check; |
+| 3 | Excel table (calculated cell, sort, filter) |  |
+| 4 | Todo app CRUD |  |
+| 5 | Fuzzy search |  |
+| 6 | Click outside to close drop down |  |
+| 7 | Star rating |  |
+| 8 | Accordion |  |
+| 9 | File uploader |  |
+| 10 | Download Progress bar |  |
+| 11 | Autocompolete |  |
+| 12 | Infinite scroller |  |
+| 13 | Poll |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
