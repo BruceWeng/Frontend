@@ -13,20 +13,19 @@
 |   |          | 9 | 12. Implement Immutability helper |
 |   |          | 10 | 14. Implement memo() |
 |   |          | 11 | 15. Implement jQuery DOM wrapper |
-|   |          | 12 | 16. Create an Event Emitter |
-|   |          | 13 | 17. Create a simple store for DOM element |
-|   |          | 14 | 20. Detect data type in JavaScript |
-|   |          | 15 | 22. Implement JSON.parse() |
-|   |          | 16 | 23. Create a sum() |
-|   |          | 17 | 24. Create a Priority Queue in JavaScript |
-|   |          | 18 | 26. Implement Object.assign() |
-|   |          | 19 | 46. Implement _.once() |
-|   |          | 20 | 54. Flatten Thunk |
-|   |          | 21 | 63. Create _.cloneDeep() |
-|   |          | 22 | 69. Implement deep equal _.isEqual() |
-|   |          | 23 | 85. Implement _.get() |
-|   |          | 24 | 122. Implement memoizeOne() |
-|   |          | 25 | 125. Implement classNames() |
+|   |          | 12 | 17. Create a simple store for DOM element |
+|   |          | 13 | 20. Detect data type in JavaScript |
+|   |          | 14 | 22. Implement JSON.parse() |
+|   |          | 15 | 23. Create a sum() |
+|   |          | 16 | 24. Create a Priority Queue in JavaScript |
+|   |          | 17 | 26. Implement Object.assign() |
+|   |          | 18 | 46. Implement _.once() |
+|   |          | 19 | 54. Flatten Thunk |
+|   |          | 20 | 63. Create _.cloneDeep() |
+|   |          | 21 | 69. Implement deep equal _.isEqual() |
+|   |          | 22 | 85. Implement _.get() |
+|   |          | 23 | 122. Implement memoizeOne() |
+|   |          | 24 | 125. Implement classNames() |
 | 2 | DOM Manipulation | 1 | 19. Find corresponding node in two identical DOM tree |
 |   |                  | 2 | 58. Get DOM tree height |
 |   |                  | 3 | 68. Get DOM tags |
@@ -65,23 +64,28 @@
 |   |               | 3 | 117. Event Delegation |
 |   |               | 4 | 134. Create your own Cookie |
 |   |               | 5 | 135. localStorage with expriration |
+| 9 | PubSub        | 1 | 16. Create an Event Emitter |
+|   |               | 2 | 56. Create an Observable |
+|   |               | 3 | 71. Implement Observable Subject |
 
 ## Part 2: Widget Design
 | # | Question | Status |
 |:-:|----------|:------:|
 | 1 | Carousel |  |
 | 2 | Light out game | &check; |
-| 3 | Excel table (calculated cell, sort, filter) |  |
-| 4 | Todo app CRUD |  |
-| 5 | Fuzzy search |  |
-| 6 | Click outside to close drop down |  |
-| 7 | Star rating |  |
-| 8 | Accordion |  |
-| 9 | File uploader |  |
-| 10 | Download Progress bar |  |
-| 11 | Autocompolete |  |
-| 12 | Infinite scroller |  |
-| 13 | Poll |  |
+| 3 | Tic Tac Toe Game |  |
+| 4 | Card Game |  |
+| 5 | Excel table (calculated cell, sort, filter) |  |
+| 6 | Todo app CRUD |  |
+| 7 | Fuzzy search |  |
+| 8 | Click outside to close drop down |  |
+| 9 | Star rating |  |
+| 10 | Accordion |  |
+| 11 | File uploader |  |
+| 12 | Download Progress bar |  |
+| 13 | Autocompolete |  |
+| 14 | Infinite scroller |  |
+| 15 | Poll |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
