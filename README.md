@@ -69,23 +69,23 @@
 |   |               | 3 | 71. Implement Observable Subject |
 
 ## Part 2: Widget Design
-| # | Question | Status |
-|:-:|----------|:------:|
-| 1 | Carousel |  |
-| 2 | Light out game | &check; |
-| 3 | Tic Tac Toe Game |  |
-| 4 | Card Game |  |
-| 5 | Excel table (calculated cell, sort, filter) |  |
-| 6 | Todo app CRUD |  |
-| 7 | Fuzzy search |  |
-| 8 | Click outside to close drop down |  |
-| 9 | Star rating |  |
-| 10 | Accordion |  |
-| 11 | File uploader |  |
-| 12 | Download Progress bar |  |
-| 13 | Autocompolete |  |
-| 14 | Infinite scroller |  |
-| 15 | Poll |  |
+| # | Question | Pure JS | React |
+|:-:|----------|:-------:|:-----:|
+| 1 | Carousel |  |  |
+| 2 | Light out game | &check; | &check; |
+| 3 | Calendar | &check; |  |
+| 4 | Tic Tac Toe Game |  |  |
+| 5 | Excel table (calculated cell, sort, filter) |  |  |
+| 6 | Todo app CRUD |  |  |
+| 7 | Fuzzy search |  |  |
+| 8 | Click outside to close drop down |  |  |
+| 9 | Star rating |  |  |
+| 10 | Accordion |  |  |
+| 11 | File uploader |  |  |
+| 12 | Download Progress bar |  |  |
+| 13 | Autocompolete |  |  |
+| 14 | Infinite scroller |  |  |
+| 15 | Poll |  |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
