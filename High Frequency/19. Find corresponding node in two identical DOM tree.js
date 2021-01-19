@@ -54,35 +54,28 @@ const ACTION = {
   COMPARE: 1
 }
 
-function Command(next_action, node) {
-  return {
-    next_action,
-    node
-  }
-}
-
 const findCorrespondingNode = (rootA, rootB, target) => {
   // your code here
   if (rootA === target) return rootB;
   // preorder
   let childrenA = [...rootA.children].reverse();
   let childrenB = [...rootB.children].reverse();
-  const stackA = [...childrenA.map((child) => Command(ACTION.VISIT, child))];
-  const stackB = [...childrenB.map((child) => Command(ACTION.VISIT, child))];
+  const stackA = [...childrenA.map((child) => [child, ACTION.VISIT])];
+  const stackB = [...childrenB];
   while (stackA.length !== 0) {
-    const currentA = stackA.pop();
-    const currentB = stackB.pop();
-    if (currentA.next_action === ACTION.COMPARE) {
-      if (currentA.node === target) return currentB.node;
+    const [nodeA, next_action] = stackA.pop();
+    const nodeB = stackB.pop();
+    if (next_action === ACTION.COMPARE) {
+      if (nodeA === target) return nodeB;
       continue;
     }
     //reverse action
-    childrenA = [...currentA.node.children].reverse();
-    childrenB = [...currentB.node.children].reverse();
-    stackA.push(...childrenA.map((child) => Command(ACTION.VISIT, child)));
-    stackB.push(...childrenB.map((child) => Command(ACTION.VISIT, child)));
-    stackA.push(Command(ACTION.COMPARE, currentA.node));
-    stackB.push(Command(ACTION.COMPARE, currentB.node));
+    childrenA = [...nodeA.children].reverse();
+    childrenB = [...nodeB.children].reverse();
+    stackA.push(...childrenA.map((child) => [child, ACTION.VISIT]));
+    stackB.push(...childrenB);
+    stackA.push([nodeA, ACTION.COMPARE]);
+    stackB.push(nodeB);
   }
   return null;
 }
