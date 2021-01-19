@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    .Board {
+      width: 30rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 0.5rem 0.5rem;
+      margin: 0.5rem;
+    }
+
+    .Box {
+      width: 10rem;
+      height: 10rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10rem;
+    }
+
+    .Box--blue {
+      background-color: dodgerblue;
+    }
+
+    .Box--red {
+      background-color: tomato;
+    }
+
+    .Result {
+      width: 30rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 0.5rem 0.5rem;
+    }
+
+    .WinnerTitle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+
+    .RestartButton {
+      display: block;
+      font-size: 2rem;
+      width: 10rem;
+      text-align: center;
+      border: 0.3rem solid black;
+    }
+  </style>
+</head>
+<body>
+  <main id="root"></main>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [boxes, setBoxes] = React.useState(new Array(9).fill(null));
+      const [turn, setTurn] = React.useState('X');
+      const [currentBox, setCurrentBox] = React.useState(null);
+      const [winner, setWinner] = React.useState(null);
+
+      // pass down to Box component
+      const changeState = (index) => {
+        setCurrentBox(() => index);
+        setBoxes((boxes) => {
+          const copy = [...boxes];
+          copy[index] = turn;
+          return copy;
+        });
+        setTurn((turn) => (turn === 'X') ? 'O' : 'X');
+      }
+      
+      // Evoked in useEffect after box state changed
+      const checkWinner = (boxes, currentBox) => {
+        const state = boxes[currentBox];
+        const winningCase = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6]
+        ];
+        let winner = null;
+        for (const line of winningCase) {
+          const [a, b, c] = line;
+          if (boxes[a] === state
+            && boxes[b] === state
+            && boxes[c] === state
+          ) winner = state;
+        }
+        if (boxes.filter((state) => state === null).length === 0
+          && winner === null) winner = 'draw';
+        setWinner(() => winner);
+      }
+
+      // check winner after box state changed
+      React.useEffect(() => {
+        checkWinner(boxes, currentBox);
+      }, [boxes, currentBox]);
+
+      // handle click for restart game button
+      const restartGame = () => {
+        setCurrentBox(() => null);
+        const copy = new Array(9).fill(null);
+        setBoxes(() => copy);
+      }
+      return (
+        <React.Fragment>
+          <div className="Board">
+            {boxes.map((box, index) => (
+            <Box 
+              key={box+index} 
+              index={index} 
+              state={box} 
+              currentBox={currentBox} 
+              changeState={changeState}
+            />
+          ))}
+        </div>
+        {
+          (winner === 'draw') &&
+          (<div className="Result">
+            <div className="WinnerTitle">{`Draw`}</div>
+            <button className="RestartButton" onClick={restartGame}>Restart Game</button>
+          </div>)
+        }
+        {
+          (winner === 'X' || winner === 'O') &&
+          (<div className="Result">
+            <div className="WinnerTitle">{`Winner is ${winner}`}</div>
+            <button className="RestartButton" onClick={restartGame}>Restart Game</button>
+          </div>) 
+        }
+        </React.Fragment>
+      )
+    }
+
+    function Box({ index, state, currentBox, changeState}) {
+      const handleClick = (event) => {
+        changeState(index);
+      }
+      const className = (index === currentBox) ? 'Box Box--red' : 'Box Box--blue';
+      const disabled = (state === null) ? false : true;
+      return (
+        <button 
+          className={className} 
+          disabled={disabled} 
+          onClick={handleClick}
+        >
+          {state}
+        </button>
+      )
+    }
+    ReactDOM.render(<React.StrictMode><App/></React.StrictMode>, root);
+  </script>
+</body>
+</html>
