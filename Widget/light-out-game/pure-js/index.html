@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>Light Out Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 12px;
+    }
+
+    #root {
+      width: 20rem;
+      display: grid;
+      grid-gap: 0.5rem 0.5rem;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    .box-blue {
+      padding: 2rem;
+      background-color: DodgerBlue;
+    }
+
+    .box-red {
+      padding: 2rem;
+      background-color: Tomato;
+    }
+  </style>
+</head>
+<body>
+	<main id="root"></main>
+</body>
+<script>
+  function createBoxes(n) {
+    for (let i = 0; i < n; i++) {
+      let button = document.createElement('button');
+      button.classList.add('box-blue');
+      button.innerText = i;
+      /* div.dataset.i = i; */
+      let row = Math.floor(i / 5);
+      let col = i % 5;
+      button.dataset.row = row;
+      button.dataset.col = col;
+      /* div.onclick = () => handleToggle(row, col); */
+      root.append(button);
+    }
+  }
+
+  function LightOutGame() {
+    // event delegation
+    // Prevent using onclick because it overwrites old onclick handlers.
+    // root implicitly select id="root"
+    root.addEventListener('click', handleClickToggle);
+    
+    function handleClickToggle(event) {
+      const row = Number(event.target.dataset.row);
+      const col = Number(event.target.dataset.col);
+      if (isNaN(row) || isNaN(col)) return;
+      const delta = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+      for (const d of delta) {
+        let next_row = row + d[0];
+        let next_col = col + d[1];
+        /* alert(JSON.stringify({ next_row, next_col })); */
+        if (inArea(next_row, next_col)) {
+          toggleElement(next_row, next_col);
+        }
+      }
+      toggleElement(row, col);
+    }
+    
+    function inArea(i, j) {
+      if (i < 0 || j < 0 || i > 4 || j > 4) return false;
+      return true;
+    }
+
+    function toggleElement(row, col) {
+      let element = document.querySelector(`[data-row="${row}"][data-col="${col}"`);
+      if (element.classList.contains('box-blue')) {
+        element.classList.toggle('box-red');
+      } else {
+        element.classList.toggle('box-blue');
+      }
+    }
+  }
+
+  createBoxes(25);
+  LightOutGame();
+</script>
+</html>
