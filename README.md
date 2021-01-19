@@ -74,18 +74,19 @@
 | 1 | Carousel |  |  |
 | 2 | Light out game | &check; | &check; |
 | 3 | Calendar | &check; |  |
-| 4 | Tic Tac Toe Game |  |  |
-| 5 | Excel table (calculated cell, sort, filter) |  |  |
-| 6 | Todo app CRUD |  |  |
-| 7 | Fuzzy search |  |  |
-| 8 | Click outside to close drop down |  |  |
-| 9 | Star rating |  |  |
-| 10 | Accordion |  |  |
-| 11 | File uploader |  |  |
-| 12 | Download Progress bar |  |  |
-| 13 | Autocompolete |  |  |
-| 14 | Infinite scroller |  |  |
-| 15 | Poll |  |  |
+| 4 | Light box |  |  |
+| 5 | Tic Tac Toe Game |  |  |
+| 6 | Excel table (calculated cell, sort, filter) |  |  |
+| 7 | Todo app CRUD |  |  |
+| 8 | Fuzzy search |  |  |
+| 9 | Click outside to close drop down |  |  |
+| 10 | Star rating |  |  |
+| 11 | Accordion |  |  |
+| 12 | File uploader |  |  |
+| 13 | Download Progress bar |  |  |
+| 14 | Autocompolete |  |  |
+| 15 | Infinite scroller |  |  |
+| 16 | Poll |  |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
