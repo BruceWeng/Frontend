@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 12px;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    .App {
+      width: 20rem;
+      display: grid;
+      grid-gap: 0.5rem 0.5rem;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .Box-blue {
+      padding: 2rem;
+      background-color: dodgerblue;
+    }
+
+    .Box-red {
+      padding: 2rem;
+      background-color: Tomato;
+    }
+  </style>
+  <title>Light out game</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const board = new Array(5).fill().map(() => new Array(5).fill(false));
+      const [boardState, setBoardState] = React.useState(board);
+      const inArea = (row, col) => {
+        return !(row < 0 || col < 0 || row > 4 || col > 4);
+      };
+      const toggleState = (row, col) => {
+        // Don't modify boardState directly
+        const copy = new Array(5).fill().map(() => new Array(5).fill(false));
+        for (let i = 0; i < copy.length; i++) {
+          for (let j = 0; j < copy[0].length; j++) {
+            copy[i][j] = boardState[i][j];
+          }
+        }
+        const delta = [
+          [-1, 0],
+          [0, 1],
+          [1, 0],
+          [0, -1]
+        ];
+        for (const d of delta) {
+          let next_row = row + d[0];
+          let next_col = col + d[1];
+          if (inArea(next_row, next_col)) {
+            copy[next_row][next_col] = !boardState[next_row][next_col];
+          }
+        }
+        copy[row][col] = !boardState[row][col];
+        setBoardState((currentBoardState) => copy); // Make sure to pass callback in setState
+      };
+
+      return (
+        <div className="App">
+          {boardState.map((row, row_id) => {
+            return row.map((state, col_id) => (
+              <Box
+                key={`${row_id},${col_id}`}
+                state={state}
+                row={row_id}
+                col={col_id}
+                toggleState={toggleState}
+              />
+            ));
+          })}
+        </div>
+      );
+    }
+
+    function Box({ state, row, col, toggleState }) {
+      const handleClick = (event) => {
+        toggleState(row, col);
+      };
+      const className = state ? "Box-red" : "Box-blue";
+      return (
+        <button
+          className={className}
+          onClick={handleClick}
+        >{`(${state}, ${row}, ${col})`}</button>
+      );
+    }
+    ReactDOM.render(<React.StrictMode><App /></React.StrictMode>, root);
+  </script>
+  <main id="root"></main>
+</body>
+</html>
