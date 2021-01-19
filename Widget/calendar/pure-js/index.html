@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: sans-serif;
+      font-size: 12px;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: row;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+      width: 5rem;
+      height: 2rem;
+      border: 0.2rem solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cell {
+      width: 5rem;
+      height: 5rem;
+      background-color: DodgerBlue;
+    }
+
+    .cell-highlight {
+      width: 5rem;
+      height: 5rem;
+      background-color: Tomato;
+    }
+
+    .cell * {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <main id="root"></main>
+  <script>
+    class Calendar {
+      constructor() {
+        this.day_map = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
+        this.month_map = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        this.year = date.getFullYear();
+        this.month = date.getMonth();
+        this.currentYear = date.getFullYear();
+        this.currentMonth = date.getMonth();
+        this.currentDate = date.getDate();
+        this.createCalendar(this.year, this.month);
+      }
+      
+      useDayRange(year, month) {
+        const first_day = new Date(year, month, 1).getDay();
+        const day_count = new Date(year, month+1, 0).getDate();
+        return [first_day, day_count];
+      }
+
+      fillDate(year, month) {
+        // update header
+        const header = document.querySelector('header');
+        header.innerHTML = `<h2>${this.year} ${this.month_map[this.month]}</h2>`;
+        const tr_length = document.querySelectorAll('tr').length;
+        // clear previous date
+        for (let row = 1; row < tr_length; row++) {
+          for (let col = 0; col < 7; col++) {
+            const td = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            td.innerHTML = '';
+            td.classList = 'cell';
+          }
+        }
+
+        const [first_day, day_count] = this.useDayRange(year, month);
+        // Remove last row
+        if (tr_length === 7 && first_day <= 4) document.querySelector('tr:last-child').remove();
+        // Add one more row if previous row number not enough
+        if (tr_length === 6 && first_day > 4) {
+          const table = document.querySelector('table');
+          const tr = document.createElement('tr');
+          for (let col = 0; col < 7; col++) {
+            const td = document.createElement('td');
+            td.classList.add('cell');
+            td.dataset.row = 6;
+            td.dataset.col = col;
+            tr.append(td);		
+          }
+          table.append(tr);
+        }
+        // fill Date
+        for (let day = first_day; day < first_day+day_count; day++) {
+          let row = Math.floor(day / 7)+1;
+          let col = day % 7;
+          const td = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+          td.innerHTML = `<h2>${day-first_day+1}</h2>`;
+          // Highlight today
+          if (day-first_day+1 === this.currentDate 
+            && month === this.currentMonth
+            && year === this.currentYear) {
+              td.classList.add('cell-highlight');
+            }
+        }
+      }
+
+      createCalendar() {
+        const header = document.createElement('header');
+        header.innerHTML = `<h2>${this.year} ${this.month_map[this.month]}</h2>`;
+        root.append(header);
+        // append nav buttons
+        const nav = document.createElement('nav');
+        const prev_button = document.createElement('button');
+        prev_button.innerText = '<';
+        prev_button.addEventListener('click', () => {
+          const month = this.month-1;
+          this.year += Math.floor((month) / 12);
+          this.month = (month+12) % 12;			
+          this.fillDate(this.year, this.month);
+        });
+        nav.append(prev_button);
+
+        const next_button = document.createElement('button');
+        next_button.innerText = '>';
+        next_button.addEventListener('click', () => {
+          const month = this.month+1;
+          this.year += Math.floor((month) / 12);
+          this.month = month % 12;
+          this.fillDate(this.year, this.month);
+        });
+        nav.append(next_button);
+        root.append(nav);
+
+        const table = document.createElement('table');
+        // append tr rows
+        for (let row = 0; row < 7; row++) {
+          const tr = document.createElement('tr');
+
+          for (let col = 0; col < 7; col++) {
+            if (row === 0) {
+              const th = document.createElement('th');
+              th.innerHTML = `<h2>${this.day_map[col]}</h2>`;
+              th.classList.add('cell');
+              tr.append(th);
+            } else {
+              const td = document.createElement('td');
+              td.classList.add('cell');
+              td.dataset.row = row;
+              td.dataset.col = col;
+              tr.append(td);			
+            }
+          }
+          table.append(tr);
+        }
+        root.append(table);
+        this.fillDate(this.year, this.month);
+      }
+    }
+
+    const date = new Date();
+    new Calendar(date);
+  </script>
+</body>
+</html>
