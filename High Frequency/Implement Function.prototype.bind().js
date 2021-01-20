@@ -22,7 +22,7 @@ Function.prototype.myBind = function() {
   let context = arguments[0];
   let params = Object.values(arguments).slice(1);
   return (...args) => {
-    return func.apply(context, [...args, ...params]);
+    return func.call(context, ...args, ...params);
   };
 }
 
