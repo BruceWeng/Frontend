@@ -13,3 +13,6 @@ function sum(num) {
   partialSum.valueOf = () => num;
   return partialSum;
 }
+
+console.log(sum(1)(2)(3)()); // 6
+console.log(sum(1)(2)(3)); // [Function: partialSum]
