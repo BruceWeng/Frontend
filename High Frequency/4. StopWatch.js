@@ -2,27 +2,32 @@ class StopWatch {
   constructor() {
     this.startAt = 0; // last time startAt
     this.lastStopTime = 0;
-    this.now = () => {
-      return (new Date()).getTime();
-    }
+    this.now = () => new Date().getTime();
   }
 
-  start() {
-    this.startAt = this.startAt ? this.startAt : this.now();
+  start() { // update startAt
+    this.startAt = this.startAt !== 0 
+      ? this.startAt 
+      : this.now();
   }
 
-  stop() {
-    this.lastStopTime = (this.startAt ? this.lastStopTime + this.now() - this.startAt : this.lastStopTime);
+  stop() { // update lastStopTime && reset startAt
+    this.lastStopTime = this.startAt !== 0 
+      ? this.lastStopTime + this.now() - this.startAt 
+      : this.lastStopTime;
     this.startAt = 0;
   }
 
-  reset() {
+  reset() { // reset startAt && lastStopTime
     this.startAt = 0;
     this.lastStopTime = 0;
   }
 
-  duration() {
-    return this.lastStopTime + (this.startAt ? this.now() - this.startAt: 0);
+  duration() { // update and return lastStopTime
+    this.lastStopTime = this.startAt !== 0 
+      ? this.lastStopTime + this.now() - this.startAt 
+      : this.lastStopTime;
+    return this.lastStopTime;
   }
 }
 
@@ -32,4 +37,5 @@ test.start();
 setInterval(function() {
   test.stop();
   console.log(test.duration());
+  test.start();
 }, 1000);
