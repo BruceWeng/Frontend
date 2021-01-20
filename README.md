@@ -85,8 +85,9 @@
 | 12 | Autocompolete |  |  | &check; |  |
 | 13 | Fuzzy search |  |  | &check; |  |
 | 14 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
-| 15 | Download Progress bar |  |  | &check; |  |
-| 16 | File uploader |  |  | &check; |  |
+| 15 | Map posts and comments |  |  | &check; |  |
+| 16 | Download Progress bar |  |  | &check; |  |
+| 17 | File uploader |  |  | &check; |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
