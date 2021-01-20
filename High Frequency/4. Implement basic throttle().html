@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttle</title>
+  <style>
+    button {
+      all: unset;
+      cursor: pointer;
+      border: 2px solid black;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <main id="root">
+    <button id="button">Click me</button>
+  </main>
+  <script>
+    let counter = 0;
+    let log = (count) => {
+      console.log(counter+=count);
+    }
+    log = throttle(log, 1000);
+    button.addEventListener('click', () => log(2));
+    
+    /**
+     * @param {Function} func
+     * @param {number} wait
+     */
+    function throttle(func, wait) {
+      let last_time = 0;
+      return (...args) => {
+        let now = new Date().getTime();
+        if (now - last_time < wait) return;
+        last_time = now;
+        return func(...args);
+      }
+    }
+  </script>
+</body>
+</html>
