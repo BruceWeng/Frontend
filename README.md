@@ -69,24 +69,24 @@
 |   |               | 3 | 71. Implement Observable Subject |
 
 ## Part 2: Widget Design
-| # | Question | Pure JS | React |
-|:-:|----------|:-------:|:-----:|
-| 1 | Carousel |  |  |
-| 2 | Light out game | &check; | &check; |
-| 3 | Calendar | &check; |  |
-| 4 | Light box |  |  |
-| 5 | Tic Tac Toe Game |  |  |
-| 6 | Excel table (calculated cell, sort, filter) |  |  |
-| 7 | Todo app CRUD |  |  |
-| 8 | Fuzzy search |  |  |
-| 9 | Click outside to close drop down |  |  |
-| 10 | Star rating |  |  |
-| 11 | Accordion |  |  |
-| 12 | File uploader |  |  |
-| 13 | Download Progress bar |  |  |
-| 14 | Autocompolete |  |  |
-| 15 | Infinite scroller |  |  |
-| 16 | Poll |  |  |
+| # | Question | Pure JS | React | Pure CSS |
+|:-:|----------|:-------:|:-----:|:--------:|
+| 1 | Carousel |  |  |  |
+| 2 | Light out game | &check; | &check; | - |
+| 3 | Calendar | &check; |  | - |
+| 4 | Light box |  |  |  |
+| 5 | Tic Tac Toe Game |  | &check; |  |
+| 6 | Excel table (calculated cell, sort, filter) |  |  |  |
+| 7 | Todo app CRUD |  |  |  |
+| 8 | Fuzzy search |  |  |  |
+| 9 | Click outside to close drop down |  |  |  |
+| 10 | Star rating |  |  | &check; |
+| 11 | Accordion |  |  |  |
+| 12 | File uploader |  |  |  |
+| 13 | Download Progress bar |  |  |  |
+| 14 | Autocompolete |  |  |  |
+| 15 | Infinite scroller |  |  |  |
+| 16 | Poll |  |  |  |
 
 ## Part 3: Performance
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
