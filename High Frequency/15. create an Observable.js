@@ -16,31 +16,6 @@ const observer = {
     console.log('ok, no more values')
   }
 }
-
-const observable = new Observable((observer)=> {
-  observer.next(1)
-  observer.next(2)
-  setTimeout(() => {
-    observer.next(3)
-    observer.next(4)
-    observer.complete()
-  }, 100)
-})
-
-const sub = observable.subscribe(observer)
-// we got a value 1
-// we got a value 2
-
-// we got a value 3
-// we got a value 4
-// ok, no more values
-
-const sub = observable.subscribe(observer)
-setTimeout(() => {
-  // ok we only subscribe for 100ms
-  sub.unsubscribe()
-}, 100)
-
 ///////////////////////////////////////////////
 class Observable {
   constructor(setup) { // function
@@ -75,3 +50,29 @@ class Observable {
     return sub;
   }
 }
+
+const observable = new Observable((observer)=> {
+  observer.next(1)
+  observer.next(2)
+  setTimeout(() => {
+    observer.next(3)
+    observer.next(4)
+    observer.complete()
+  }, 100)
+})
+
+// const sub1 = observable.subscribe(observer)
+// we got a value 1
+// we got a value 2
+
+// we got a value 3
+// we got a value 4
+// ok, no more values
+
+const sub2 = observable.subscribe(observer)
+setTimeout(() => {
+  // ok we only subscribe for 50ms
+  sub2.unsubscribe()
+}, 50)
+// we got a value 1
+// we got a value 2

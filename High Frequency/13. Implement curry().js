@@ -7,7 +7,7 @@ function curry(func) {
     // 2. if not enough, bind the args and wait for new one
 
     if (args.length >= func.length) { // function.length return how many args it expects
-      return func.apply(this, args); // execute func only when args.length >= func.length
+      return func.call(this, ...args); // execute func only when args.length >= func.length
     } else {
       // 1,2
       return curried.bind(this, ...args);

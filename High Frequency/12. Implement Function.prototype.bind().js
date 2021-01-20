@@ -17,13 +17,8 @@ function sum(a, b) {
   return a + b;
 }
 
-Function.prototype.myBind = function() {
-  let func = this;
-  let context = arguments[0];
-  let params = Object.values(arguments).slice(1);
-  return (...args) => {
-    return func.call(context, ...args, ...params);
-  };
+Function.prototype.myBind = function(context, ...args) {
+  return (...args2) => this.call(context, ...args, ...args2); // 'this' is the function
 }
 
 const loopProfile = profile.myBind(obj);
@@ -31,3 +26,7 @@ loopProfile(3); // John from CA * 3
 
 const plusOne = sum.myBind(null, 1);
 console.log(plusOne(2)); // 3
+
+Function.prototype.myApply = function (context, args) {
+  return this.call(context, ...args);
+}
