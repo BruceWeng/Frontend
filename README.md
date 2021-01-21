@@ -90,9 +90,30 @@
 | 17 | File uploader |  |  | &check; |  |
 
 ## Part 3: Performance
+### What happend when enter a url:
 ![HTTP-over-TLS-diagram](./img/HTTP-over-TLS-diagram.png)
 ![Devtool-timing](./img/Devtool-timing.png)
-![Map-timing-to-diagram](./img/Map-timing-to-diagram.png)
+![Map-timing-to-diagram](./img/Map-timing-to-diagram.png)<br>
+### Server Rendering:
+![Server-rendering-tti](./img/server-rendering-tti.png)<br>
+### Static Rendering:
+![Static-rendering-tti](./img/static-rendering-tti.png)<br>
+### Client Rendering:
+![Client-rendering-tti](./img/client-rendering-tti.png)<br>
+### Progressive Rendering with placeholders and one time hydration:
+1. Load initial page with placeholder on secondary contents.<br>
+![Progressive-rendering-1](./img/Progressive-rendering-1.png)
+2. Finish loading all secondary contents.<br>
+![Progressive-rendering-2](./img/Progressive-rendering-2.png)
+3. Hydration.<br>
+![Progressive-rendering-3](./img/Progressive-rendering-3.png)<br>
+### Progressive Hydration with React Concurrent Mode:
+1. Load initial page with placeholder on secondary contents.<br>
+![Progressive-rendering-1](./img/Progressive-rendering-1.png)
+2. Finish loading first secondary content.<br>
+![Progressive-hydration-1](./img/Progressive-hydration-1.png)
+3. Progressive hydration with React Concurrent Mode.<br>
+![Progressive-hydation-2](./img/Progressive-hydration-2.png)<br>
 ### Metrics:
 | # | Name | Definition | Measure | Diagnose | Fix |
 |:-:|------|------------|---------|----------|-----|
