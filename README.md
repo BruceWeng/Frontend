@@ -81,11 +81,12 @@
 | 8 | Accordion |  |  | - |  |
 | 9 | Infinite scroller |  |  | - |  |
 | 10 | Carousel |  |  | &check; |  |
+| 11 | Render {JSON}Placehoder data |  |  | &check; |  |
+| 12 | Pagination |  |  | &check; |  |
 | 11 | Todo app CRUD |  |  | &check; |  |
 | 12 | Autocompolete |  |  | &check; |  |
 | 13 | Fuzzy search |  |  | &check; |  |
 | 14 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
-| 15 | Map posts and comments |  |  | &check; |  |
 | 16 | Download Progress bar |  |  | &check; |  |
 | 17 | File uploader |  |  | &check; |  |
 
@@ -117,7 +118,7 @@
 ### Metrics:
 | # | Name | Definition | Measure | Diagnose | Fix |
 |:-:|------|------------|---------|----------|-----|
-| 1 | Time to First Byte (TTFB) | the time between HTTP GET and first byte of response received aka (Wait) | | | |
+| 1 | Time to First Byte (TTFB) | the time between HTTP GET and first byte of response received aka (Wait) | curl {time_starttransfer} | 1. Slow DNS resolution<br> 2. Slow HTTPS redirection or certificate verification<br> 3. Slow database connection (for dynamic sites like WordPress)<br> 4. Poor disk performance (Disk I/O) of the server<br> 5. Poor network connection to the server<br> 6. Insufficient system resources (CPU and RAM) on the server | CDN |
 | 2 | First Paint (FP) | the time first pixel rendered on the screen (usually background color. JS not ready yet) | | | |
 | 3 | First Contentful Paint (FCP) | the time content from DOM rendered on the screen (text/image/svg) | | | |
 | 4 | First Meaningful Paint (FMP) | the time primary content rendered on the screen(developer defined) | | | |
