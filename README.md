@@ -80,15 +80,15 @@
 | 7 | Click outside to close drop down |  |  | - |  |
 | 8 | Accordion |  |  | - |  |
 | 9 | Infinite scroller |  |  | - |  |
-| 10 | Carousel |  |  | &check; |  |
-| 11 | Render {JSON}Placehoder data |  |  | &check; |  |
-| 12 | Pagination |  |  | &check; |  |
-| 11 | Todo app CRUD |  |  | &check; |  |
-| 12 | Autocompolete |  |  | &check; |  |
-| 13 | Fuzzy search |  |  | &check; |  |
-| 14 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
-| 16 | Download Progress bar |  |  | &check; |  |
-| 17 | File uploader |  |  | &check; |  |
+| 10 | File uploader |  |  | - |  |
+| 11 | Carousel |  |  | &check; |  |
+| 12 | Render {JSON}Placehoder data |  |  | &check; |  |
+| 13 | Pagination |  |  | &check; |  |
+| 14 | Todo app CRUD |  |  | &check; |  |
+| 15 | Autocompolete |  |  | &check; |  |
+| 16 | Fuzzy search |  |  | &check; |  |
+| 17 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
+| 18 | Download Progress bar |  |  | &check; |  |
 
 ## Part 3: Performance
 ### What happend when enter a url:
@@ -126,7 +126,9 @@
 | 6 | Total Blocking Time (TBT) | the time between FP and TTI | Calculate from FP and TTI | see TTI | see TTI |
 | 7 | Largest Contentful Paint (LCP) | the time largest node rendered (measures loading performance) | 1. `web-vitals` JS lib<br> 2.Chrome DevTools/Performance<br> 3.PageSpeed Insights<br> | 1. SLow server response times<br> 2. Render-blocking Javascript and CSS<br> 3. Resource load times<br> 4. Client-side rendering | 1. Appply instant loading with the PRPL pattern<br> 2. Optimizing the Critical Rendering Path<br> 3. Optimize your CSS<br> 4. Optimizee your images<br> 5. Optimize your Fonts<br> 6. Optimize your Javascript (for client-rendered sites) |
 | 8 | First Input Delay (FID) | (measures interactivity) | 1. `web-vitals` JS lib<br> 2.PageSpeed Insights<br> | see TTI | see TTI |
-| 9 | Cumulative Layout Shift (CLS) | (impact fraction) * (distance fraction) (measures visual stability) | 1. `web-vitals` JS lib<br> 2.PageSpeed Insights<br> | Impact fraction: Shifting content viewport percentage.<br>Distance fraction: Shifting distance viewport percentage. | 1. Always include size attributes on your images and video elements, or otherwise reserve the required space with something like CSS aspect ratio boxes.<br> 2. Never insert content above existing content, except in response to a user interaction.<br> 3. Prefer transform animations to animations of properties that trigger layout changes. |
+| 9 | Cumulative Layout Shift (CLS) | (impact fraction) * (distance fraction) (measures visual stability) | 1. `web-vitals` JS lib<br> 2.PageSpeed Insights<br> | **Impact fraction**: Shifting content viewport percentage.<br>**Distance fraction**: Shifting distance viewport percentage. | 1. Always include size attributes on your images and video elements, or otherwise reserve the required space with something like CSS aspect ratio boxes.<br> 2. Never insert content above existing content, except in response to a user interaction.<br> 3. Prefer transform animations to animations of properties that trigger layout changes. |
+![FID](./img/fid.png)
+![TBT](./img/tbt.png)
 ## Part 4: System Design
 ### 1. API
 ### 2. Async query function:
@@ -233,9 +235,4 @@ interface {
 1. Twitter/Facebook/Instagram (User, Post, Friendship, Media)
 2. WhatsApp (Real time Chat service, User, Message, Frinedship, Status, Channel)
 3. Netflix (Real time stream service, Video)
-4. Uber/Yelp (Location based service, Geo, Dispatch)
-5. Airbnb (Hotel booking service, Search, Book)
-6. Robinhood (Real time market data service)
-7. Gmail (Message, Thread, Label, Draft)
-8. Google document (Collaborative editing service, Format, Git, Concurrency)
-9. Youtube (Recomendation, Video)
+4. Pinterest (Image sharing service)
