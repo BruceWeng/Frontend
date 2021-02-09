@@ -1,33 +1,30 @@
 class StopWatch {
   constructor() {
-    this.startAt = 0; // last time startAt
-    this.lastStopTime = 0;
-    this.now = () => new Date().getTime();
+    this.start_at = 0;
+    this.last_stop_time = 0;
   }
-
-  start() { // update startAt
-    this.startAt = this.startAt !== 0 
-      ? this.startAt 
-      : this.now();
+  
+  start() {
+    if (this.start_at === 0) this.start_at = new Date().getTime();
   }
-
-  stop() { // update lastStopTime && reset startAt
-    this.lastStopTime = this.startAt !== 0 
-      ? this.lastStopTime + this.now() - this.startAt 
-      : this.lastStopTime;
-    this.startAt = 0;
+  
+  stop() {
+    if (this.start_at !== 0) {
+      this.last_stop_time += new Date().getTime() - this.start_at;
+      this.start_at = 0;
+    }
   }
-
-  reset() { // reset startAt && lastStopTime
-    this.startAt = 0;
-    this.lastStopTime = 0;
+  
+  reset() {
+    this.start_at = 0;
+    this.last_stop_time = 0;
   }
-
-  duration() { // update and return lastStopTime
-    this.lastStopTime = this.startAt !== 0 
-      ? this.lastStopTime + this.now() - this.startAt 
-      : this.lastStopTime;
-    return this.lastStopTime;
+  
+  duration() {
+    if (this.start_at !== 0) {
+      this.last_stop_time += new Date().getTime() - this.start_at;
+    }
+    return this.last_stop_time;
   }
 }
 
