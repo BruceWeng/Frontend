@@ -13,7 +13,7 @@ function visit(tree, set) {
   for (let child of tree.children) visit(child, set);
 }
 
-// Iteration solution
+// Iteration solution:DFS
 /**
  * @param {HTMLElement} tree
  * @return {string[]}
@@ -27,4 +27,22 @@ function getTags(tree) {
     stack.push(...top.children)
   }
   return [...set]
+}
+
+// BFS
+function getTags(tree) {
+  // your code here
+  if (tree === null) return [];
+  const set = new Set();
+  const queue = [tree];
+  while (queue.length !== 0) {
+    let size = queue.length;
+    while (size > 0) {
+      let node = queue.shift();
+      set.add(node.tagName.toLowerCase());
+      queue.push(...node.children);
+      size--;
+    }
+   }
+  return [...set];
 }
