@@ -10,6 +10,7 @@
  * Could you solve this problem both with special DOM api for better performance?
  * What are the time cost for each solution?
  */
+// target is a pointer to a HTMLElement in rootA tree.
 // Recursion
 function findCorrespondingNode(rootA, rootB, target) {
   if (rootA === target) return rootB;
@@ -34,7 +35,7 @@ const findCorrespondingNode = (rootA, rootB, target) => {
   return null;
 }
 
-// Trace path from target to rootA with in dex in path[]
+// Trace path from target to rootA with index in path[]
 function findCorrespondingNode(rootA, rootB, target) {
   if (rootA === target) return rootB;
   const path = [];
