@@ -36,6 +36,19 @@ console.log(flat(user));
   address_primary_street_cross: '32'
 }
 */
+function flat(obj, depth=Infinity, parent_key='') {
+  let result = {};
+  for (const key in obj) {
+    const new_key = parent_key === '' ? key : `${parent_key}_${key}`;
+    if (typeof obj[key] === "object" && depth > 0) {
+      result = {...result, ...flat(obj[key], depth-1, new_key)};
+    } else {
+      result[new_key] = obj[key];
+    }
+  }
+  return result;
+};
+
 function flat(obj, depth=Infinity) {
   const result = {};
   const stack = [...Object.keys(obj).map(key => {
@@ -54,16 +67,3 @@ function flat(obj, depth=Infinity) {
   }
   return result;
 }
-
-function flat(obj, depth=Infinity, parent_key='') {
-  let result = {};
-  for (const key in obj) {
-    const new_key = parent_key === '' ? key : `${parent_key}_${key}`;
-    if (typeof obj[key] === "object" && depth > 0) {
-      result = {...result, ...flat(obj[key], depth-1, new_key)};
-    } else {
-      result[new_key] = obj[key];
-    }
-  }
-  return result;
-};
