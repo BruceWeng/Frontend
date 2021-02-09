@@ -31,3 +31,14 @@ function getHeight(tree) {
   }
   return height;
 }
+// 2021/02/09
+/**
+ * @param {HTMLElement | null} tree
+ * @return {number}
+ */
+function getHeight(tree) {
+  // your code here         
+  if (tree === null) return 0;
+  if (tree.children.length === 0) return 1;
+  return Math.max(...[...tree.children].map((item) => getHeight(item)))+1;
+}
