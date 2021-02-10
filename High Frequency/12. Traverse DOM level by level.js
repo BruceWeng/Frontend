@@ -3,13 +3,18 @@
  * @returns { HTMLElement[] }
  */
 function flatten(root) {
+  // your code here
   if (root === null) return [];
-  const queue = [root];
   const result = [];
-  while (queue.length > 0) {
-    const head = queue.shift();
-    result.push(head);
-    queue.push(...head.children);
+  const queue = [root];
+  while (queue.length !== 0) {
+    let size = queue.length;
+    while (size > 0) {
+      const node = queue.shift();
+      result.push(node);
+      queue.push(...node.children);
+      size--;
+    }
   }
   return result;
 }
