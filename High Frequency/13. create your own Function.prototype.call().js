@@ -6,6 +6,7 @@
  */
 Function.prototype.mycall = function(context, ...args) {
   // 7 Steps:
+  // context = context || {}; // in nodejs
   context ??= window; // 1.context can be empty (if context = null, undefined, false, context = window)
   context = Object(context); // 2.transform primitive value
   let func = Symbol(); // 3.create a unique property 
