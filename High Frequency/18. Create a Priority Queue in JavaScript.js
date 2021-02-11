@@ -4,9 +4,9 @@ class PriorityQueue {
     this.compare = compareFunc;
     // Utility
     this.top = 0;
-    this.parent = i => ((i + 1) >> 1) - 1;
-    this.left = i => (i << 1) + 1;
-    this.right = i => (i << 1) + 2; 
+    this.parent = i => ((i + 1) >> 1) - 1; // for shiftUp
+    this.left = i => (i << 1) + 1; // for shiftDown
+    this.right = i => (i << 1) + 2; // for shiftDown
   }
   size() {
     return this.heap.length;
@@ -50,16 +50,16 @@ class PriorityQueue {
       let right_index = this.right(index);
       let left_index = this.left(index);
 
-      if (left_index < this.size() && 
-          this.more(left_index, index)) swap_index = left_index;
+      if (left_index < this.size() 
+        && this.more(left_index, index)) swap_index = left_index;
 
-      if (right_index < this.size() && 
-          this.more(right_index, index) && 
-          this.more(right_index, left_index)) swap_index = right_index;
+      if (right_index < this.size() 
+        && this.more(right_index, index) 
+        && this.more(right_index, left_index)) swap_index = right_index;
 
       if (swap_index === null) break;
 
-      this.swap(index, swap_index);
+      this.swap(swap_index, index);
       index = swap_index;
     }
   }
