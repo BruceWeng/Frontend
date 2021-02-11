@@ -18,34 +18,35 @@ const observer = {
 }
 ///////////////////////////////////////////////
 class Observable {
-  constructor(setup) { // function
-    this.subscriber = setup;
+  
+  constructor(setup) {
+    this.subscriber = setup; // func, sub should be passed into this function
   }
  
   subscribe(observer) {
     let isUnsubscribed = false;
     let sub = {
-      unsubscribe: () => {
+      unsubscribe() {
         isUnsubscribed = true;
       },
-      next: (value) => {
+      next(value) {
         if (isUnsubscribed) return;
-        // if a function is passed as observer, it is treated as next.
+        // if a func is passed in as an obsever, it is treated as next
         if (observer instanceof Function) observer(value);
-        else if (observer.next) observer.next(value);
+        if (observer.next) observer.next(value);
       },
-      error: (reason) => {
+      error(reason) {
         if (isUnsubscribed) return;
         isUnsubscribed = true;
         if (observer.error) observer.error(reason);
       },
-      complete: () => {
+      complete() {
         if (isUnsubscribed) return;
         isUnsubscribed = true;
         if (observer.complete) observer.complete();
       }
-    };
 
+    }
     this.subscriber(sub);
     return sub;
   }
