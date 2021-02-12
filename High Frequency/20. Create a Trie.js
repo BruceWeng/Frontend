@@ -1,13 +1,17 @@
 class TrieNode {
-  isWord = false;
-  children = {}; // <key: character, value: TrieNode[]>
+  constructor() {
+    this.isWord = false;
+    this.children = {}; // <key: character, value: TrieNode[]>
+  }
 }
 
 class Trie {
 /**
  * Initialize your data structure here.
  */
-  root = new TrieNode();
+  constructor() {
+    this.root = new TrieNode();
+  }
 
 /**
  * Inserts a word into the trie. 
@@ -51,3 +55,12 @@ class Trie {
     return true;
   }
 }
+
+const trie = new Trie();
+
+trie.insert("apple");
+console.log(trie.search("apple"));   // returns true
+console.log(trie.search("app"));     // returns false
+console.log(trie.startsWith("app")); // returns true
+trie.insert("app");   
+console.log(trie.search("app"));     // returns true
