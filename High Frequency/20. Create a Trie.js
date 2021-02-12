@@ -1,7 +1,7 @@
 class TrieNode {
   constructor() {
     this.isWord = false;
-    this.children = {}; // <key: character, value: TrieNode[]>
+    this.children = {}; // <character, TrieNode[]>
   }
 }
 
