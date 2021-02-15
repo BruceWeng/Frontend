@@ -23,7 +23,7 @@ class TimeMap {
     const list = this.store[key];
     let left = 0, right = list.length; // [left, right)
     while (left < right) {
-      const mid = left + (right - left) >> 1;
+      const mid = left + ((right - left) >> 1); // remember ()
       if (list[mid].timestamp > timestamp) // condition
         right = mid; 
       else left = mid+1;
