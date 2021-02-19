@@ -4,16 +4,16 @@ console.log(findKehLargest(nums, 4)); // 2
 console.log(quickSort(nums)); // [1,2,2,4,5,6]
 
 function partition(nums, pivot, left, right) {
-  let pivotValue = nums[pivot];
-  let partitionIndex = left;
+  let pivot_value = nums[pivot];
+  let partition_index = left;
   for (let i = left; i < right; i++) {
-    if (nums[i] < pivotValue) {
-      swap(nums, i, partitionIndex);
-      partitionIndex++;
+    if (nums[i] < pivot_value) {
+      swap(nums, i, partition_index);
+      partition_index++;
     }
   }
-  swap(nums, pivot, partitionIndex);
-  return partitionIndex;
+  swap(nums, partition_index, pivot);
+  return partition_index;
 };
 
 function swap(nums, a, b) {
@@ -22,24 +22,24 @@ function swap(nums, a, b) {
 
 function shuffle(nums) {
   if (nums.length < 2) return nums;
-  for (let j = 1; j < nums.length; j++) {
-    let i = Math.floor(Math.random() * (j+1));
-    swap(nums, i, j);
+  for (let i = nums.length-1; i > 0; i--) {
+    swap(nums, i, Math.floor(Math.random() * (i+1)));
   }
   return nums;
 }
 
 function findKehLargest(nums, k) {
+  if (nums.length === 0) return;
   nums = shuffle(nums);
-  let kth = nums.length-k;
+  const kth = nums.length-k;
   let left = 0;
   let right = nums.length-1;
   while (left <= right) {
     let pivot = right;
-    let partitionIndex = partition(nums, pivot, left, right);
-    if (partitionIndex === kth) break;
-    if (partitionIndex < kth) left = partitionIndex+1;
-    if (partitionIndex > kth) right = partitionIndex-1
+    let partition_index = partition(nums, pivot, left, right);
+    if (partition_index === kth) break;
+    if (partition_index < kth) left = partition_index+1;
+    if (partition_index > kth) right = partition_index-1;
   }
   return nums[kth];
 };
@@ -49,9 +49,9 @@ function quickSort(nums, left=0, right=nums.length-1) {
   if (right - left === nums.length-1) nums = shuffle(nums); // shuffle initial nums so that worst T: O(nlogn)
   if (left < right) {
     let pivot = right;
-    let partitionIndex = partition(nums, pivot, left, right); 
-    quickSort(nums, left, partitionIndex-1);
-    quickSort(nums, partitionIndex+1, right);
+    let partition_index = partition(nums, pivot, left, right); 
+    quickSort(nums, left, partition_index-1);
+    quickSort(nums, partition_index+1, right);
   }
   return nums;
 }
