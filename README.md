@@ -89,6 +89,8 @@
 | 16 | Fuzzy search |  |  | &check; |  |
 | 17 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
 | 18 | Download Progress bar |  |  | &check; |  |
+| 19 | Toast Notification |  |  |  |  |
+| 20 | Snake Game |  |  |  |  |
 
 ## Part 3: Performance
 ### What happend when enter a url:
