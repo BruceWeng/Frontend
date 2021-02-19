@@ -24,8 +24,8 @@ function inorder(node, result=[]) {
 }
 
 function minValueNode(node) {
-  if (node.left === null) return node;
-  minValueNode(node.left);
+  while (node.left !== null) node = node.left;
+  return node;
 }
 
 function deleteNode(node, key) {
