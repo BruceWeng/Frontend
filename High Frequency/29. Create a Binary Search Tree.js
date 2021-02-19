@@ -54,11 +54,33 @@ function deleteNode(node, key) {
   return node;
 }
 
+// lowerBound: among all the nodes that node.key > target.key, find the minimum node
+function successor(node, target) {
+  if (node === null) return null;
+  if (node.key > target.key) {
+    let left = successor(node.left, target);
+    return left !== null ? left : node;
+  }
+  else return successor(node.right, target);
+}
+
+// upperBound: among all the nodes that node.key < target.key, find the maximum node
+function predecessor(node, target) {
+  if (node === null) return null;
+  if (node.key < target.key) {
+    let right = predecessor(node.right, target);
+    return right !== null ? right : node;
+  }
+  else return predecessor(node.left, target);
+}
+
 let root = new TreeNode(1);
 root = insertNode(root, 4);
 root = insertNode(root, 3);
 root = insertNode(root, 2);
 console.log(inorder(root)); // [1,2,3,4]
-console.log(minValueNode(root)); // node 1
+console.log(minValueNode(root)); // TreeNode(1)
 root = deleteNode(root, 3);
 console.log(inorder(root)); // [1,2,4]
+console.log(successor(root, new TreeNode(2))); // TreeNode(4)
+console.log(predecessor(root, new TreeNode(2))); // TreeNode(1)
