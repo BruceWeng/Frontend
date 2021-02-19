@@ -17,9 +17,10 @@ function insertNode(node, key) {
 }
 
 function inorder(node, result=[]) {
-  if (node.left !== null) inorder(node.left, result);
+  if (node == null) return;
+  inorder(node.left, result);
   result.push(node.key);
-  if (node.right !== null) inorder(node.right, result);
+  inorder(node.right, result);
   return result;
 }
 
