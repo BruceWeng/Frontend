@@ -1,0 +1,70 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star rating</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 12px;
+    }
+
+    #root {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid black 0.5em;
+      height: 100%;
+      direction: rtl; /* reverse sibling */
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      display: inline-block;
+      font-size: 5em;
+      position: relative; /* used as anchor for child absolute position */
+    }
+
+    .rating label::before {
+      content: '\2606';
+      display: block;
+      cursor: pointer;
+      /* default position: static; */
+    }
+
+    .rating label::after {
+      content: '\2605';
+      display: block;
+      cursor: pointer;
+      position: absolute; /* align to parent relative */
+      top: 0; /* position and top combo to overlap before content */
+      color: gold;
+      opacity: 0; /* hidden by default */
+    }
+
+    .rating label:hover::after,
+    .rating input:hover ~ label::after,
+    .rating input:checked ~ label::after { /* ~ select every sibling after input */
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <main id="root">
+    <form class="rating">
+      <input type="radio" name="star" id="1"><label for="1"></label>
+      <input type="radio" name="star" id="2"><label for="2"></label>
+      <input type="radio" name="star" id="3"><label for="3"></label>
+      <input type="radio" name="star" id="4"><label for="4"></label>
+      <input type="radio" name="star" id="5"><label for="5"></label>
+    </form>
+  </main>
+</body>
+</html>

@@ -73,8 +73,8 @@
 |:-:|----------|:-------:|:-----:|:----------:|:--------:|
 | 1 | Light out game | &check; | &check; | - | - |
 | 2 | Calendar | &check; |  | - | - |
-| 3 | Tic Tac Toe Game |  | &check; | - |  |
-| 4 | Star rating |  |  | - | &check; |
+| 3 | Tic Tac Toe Game |  | &check; | - | - |
+| 4 | Star rating | - | - | - | &check; |
 | 5 | Poll |  |  | - |  |
 | 6 | Light box |  |  | - |  |
 | 7 | Click outside to close drop down |  |  | - |  |
