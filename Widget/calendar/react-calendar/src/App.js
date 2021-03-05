@@ -1,5 +1,5 @@
 import './App.css'
-import React, {useState} from 'react'
+import React, {useReducer} from 'react'
 
 function Calendar() {
   const date = new Date();
@@ -8,8 +8,29 @@ function Calendar() {
   const current_year = date.getFullYear();
   const current_month = date.getMonth();
   const current_date = date.getDate();
-
-  let [time, setTime] = useState({year: date.getFullYear(), month: date.getMonth()});
+  const ACTIONS = {
+    MONTH_DECREASED: 'month-decreased',
+    MONTH_INCREASED: 'month-increased'
+  }
+  const reducer = (time, action) => {
+    switch (action.type) {
+      case ACTIONS.MONTH_DECREASED:
+        return {
+          ...time,
+          year: time.year + Math.floor(action.payload.month / 12),
+          month: (action.payload.month + 12) % 12 
+        }
+      case ACTIONS.MONTH_INCREASED:
+        return { 
+          ...time,
+          year: time.year + Math.floor(action.payload.month / 12),
+          month: (action.payload.month + 12) % 12 
+        }
+      default:
+        return time;
+    }
+  }
+  let [time, dispatch] = useReducer(reducer, {year: date.getFullYear(), month: date.getMonth()});
 
   const first_day = new Date(time.year, time.month, 1).getDay();
   const day_count = new Date(time.year, time.month + 1, 0).getDate();
@@ -23,23 +44,11 @@ function Calendar() {
   }
 
   const handlePrevButton = () => {
-    let month = time.month - 1;
-    setTime((prev_time) => ({ 
-        ...prev_time,
-        year: prev_time.year + Math.floor(month / 12),
-        month: (month + 12) % 12 
-      })
-    );
+    dispatch({type: ACTIONS.MONTH_DECREASED, payload: {month: time.month - 1}});
   }
 
   const handleNextButton = () => {
-    let month = time.month + 1;
-    setTime((prev_time) => ({ 
-        ...prev_time,
-        year: prev_time.year + Math.floor(month / 12),
-        month: (month + 12) % 12 
-      })
-    );
+    dispatch({type: ACTIONS.MONTH_INCREASED, payload: {month: time.month + 1}});
   }
 
   return (
