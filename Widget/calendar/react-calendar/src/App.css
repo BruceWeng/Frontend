@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  width: 5rem;
+  height: 2rem;
+  border: 0.2rem solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Cell {
+  width: 5rem;
+  height: 5rem;
+  background-color: dodgerblue;
+  text-align: center;
+ }
+
+ .Cell--highlight {
+  width: 5rem;
+  height: 5rem;
+  background-color: tomato;
+  text-align: center; 
+ }
