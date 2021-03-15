@@ -53,17 +53,17 @@ function Calendar() {
 
   return (
     <>
-      <header><h2>{`${time.year} ${month_map[time.month]}`}</h2></header>
+      <header><h2 data-testid="current-month">{`${time.year} ${month_map[time.month]}`}</h2></header>
       <nav>
-        <button onClick={handlePrevButton}>{'<'}</button>
-        <button onClick={handleNextButton}>{'>'}</button>
+        <button data-testid="prev-btn" onClick={handlePrevButton}>{'<'}</button>
+        <button data-testid="next-btn" onClick={handleNextButton}>{'>'}</button>
       </nav>
       <table>
         <thead>
         {table.filter((row, i) => i === 0).map((row, i) => {
             return (
               <tr key={i}>{row.map((col, j) => {
-                  return <th key={j} className="Cell">{day_map[col]}</th>
+                  return <th data-testid={`cell-header-${i}-${j}`} key={j} className="Cell">{day_map[col]}</th>
               })}</tr>
             )
           })}
@@ -75,7 +75,7 @@ function Calendar() {
             .map((row, i) => {
               return (
                 <tr key={i}>{row.map((col, j) => {
-                  return <td key={j} 
+                  return <td data-testid={`cell-content-${i}-${j}`}key={j} 
                     className={col === current_date
                       && time.month === current_month
                       && time.year === current_year 
