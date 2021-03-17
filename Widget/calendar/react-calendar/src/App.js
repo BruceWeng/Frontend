@@ -14,20 +14,25 @@ function Calendar() {
   }
   const reducer = (time, action) => {
     switch (action.type) {
-      case ACTIONS.MONTH_DECREASED:
+      case ACTIONS.MONTH_DECREASED: {
+        const new_month = action.payload.month - 1;
         return {
           ...time,
-          year: time.year + Math.floor(action.payload.month / 12),
-          month: (action.payload.month + 12) % 12 
+          year: time.year + Math.floor(new_month / 12),
+          month: (new_month + 12) % 12 
         }
-      case ACTIONS.MONTH_INCREASED:
+      }
+      case ACTIONS.MONTH_INCREASED: {
+        const new_month = action.payload.month + 1;
         return { 
           ...time,
-          year: time.year + Math.floor(action.payload.month / 12),
-          month: (action.payload.month + 12) % 12 
+          year: time.year + Math.floor(new_month / 12),
+          month: (new_month + 12) % 12 
         }
-      default:
+      }
+      default: {
         return time;
+      }
     }
   }
   let [time, dispatch] = useReducer(reducer, {year: date.getFullYear(), month: date.getMonth()});
@@ -44,11 +49,11 @@ function Calendar() {
   }
 
   const handlePrevButton = () => {
-    dispatch({type: ACTIONS.MONTH_DECREASED, payload: {month: time.month - 1}});
+    dispatch({type: ACTIONS.MONTH_DECREASED, payload: {month: time.month}});
   }
 
   const handleNextButton = () => {
-    dispatch({type: ACTIONS.MONTH_INCREASED, payload: {month: time.month + 1}});
+    dispatch({type: ACTIONS.MONTH_INCREASED, payload: {month: time.month}});
   }
 
   return (
