@@ -3,6 +3,7 @@ import {useEffect, useReducer} from 'react';
 
 function App() {
   const ACTIONS = {
+    IMAGES_ISLOADING: 'images-isloading',
     IMAGES_INITIALIZED: 'images-initialized',
     SLIDE_INDEX_INCREASED: 'slide-index-increased',
     SLIDE_INDEX_DECREASED: 'slide-index-decreased',
@@ -10,6 +11,12 @@ function App() {
   }
   const reducer = (slide, action) => {
     switch (action.type) {
+      case ACTIONS.IMAGES_ISLOADING: {
+        return {
+          ...slide,
+          isLoading: action.payload.isLoading
+        }
+      }
       case ACTIONS.IMAGES_INITIALIZED: {
         return {
           ...slide,
@@ -39,7 +46,7 @@ function App() {
       }
     }
   }
-  const [slide, dispatch] = useReducer(reducer, {images: [], selected_idx: 0})
+  const [slide, dispatch] = useReducer(reducer, {isLoading: false, images: [], selected_idx: 0})
   const handleBtnPrevClick = () => {
     dispatch({type: ACTIONS.SLIDE_INDEX_DECREASED, payload: {selected_idx: slide.selected_idx}})
   }
@@ -50,17 +57,26 @@ function App() {
     dispatch({type: ACTIONS.SLIDE_INDEX_SELECTED, payload: {selected_idx: idx}})
   }
   useEffect(() => {
+    dispatch({type: ACTIONS.IMAGES_ISLOADING, payload:{isLoading: true}})
     fetch('https://jsonplaceholder.typicode.com/photos?_start=0&_limit=10')
-    .then(response => response.json())
+    .then(response => {
+      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
+      return response.json()
+    })
     .then(json => dispatch({type: ACTIONS.IMAGES_INITIALIZED, payload: {images: json}}))
-    .catch(reason => console.error(`Image fetching failed: ${reason}`))
+    .catch(reason => {
+      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
+      console.error(`Image fetching failed: ${reason}`)
+    })
   }, [])
   return (
     <div className="App">
       <div className="Carousel__slide-list-container">
         <button className="Carousel__btn--prev" data-testid="btn-prev" onClick={handleBtnPrevClick}></button>
         <ul className="Carousel__slide-list">
-          {slide.images.filter((image, idx) => idx === slide.selected_idx)
+          {slide.isLoading 
+            ? 'loading...' 
+            : slide.images.filter((image, idx) => idx === slide.selected_idx)
             .map((image) => <li key={image.id} 
                                 className="Carousel__slide-item" 
                                 data-testid="slide-item"
