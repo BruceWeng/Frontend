@@ -1,0 +1,89 @@
+.App-logo {
+  height: 100px;
+}
+
+.App-header {
+  background-color: #fff;
+  height: 100px;
+  text-align: center;
+}
+
+.App-title {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.App-intro {
+  text-align: center;
+}
+
+#fetch-toast-button {
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  background-image: none;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 16px;
+  height: 40px;
+  background-color: rgb(67, 176, 42);
+  color: rgb(255, 255, 255);
+}
+
+#fetch-toast-button:hover {
+  background-color: rgb(20, 110, 4);
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+a {
+  text-decoration: none;
+}
+.Toast__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.Toast {
+  margin-right: 1rem;
+  margin-top: 1rem;
+  width: 23rem;
+
+  padding: 1rem;
+  border: solid 1px rgb(215, 215, 215);
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0px 4px 10px 0px rgb(215, 215, 215); /* offset-x, offset-y, blur-radius, spread-radius, color */
+  color: rgb(73, 78, 92);
+}
+.Toast__close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.Toast__close-icon {
+  display: inline;
+  font-style: normal;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.Toast__close-icon::before {
+  color: darkgray;
+  content:'\2573';
+}
+.Toast__action-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.Toast__action {
+  color: rgb(67, 176, 42);
+}

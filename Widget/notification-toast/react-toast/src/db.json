@@ -1,0 +1,23 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "message": "This is the content of a message. It can be very short or very long. Keep that in mind.",
+      "action": {
+        "label": "Action label",
+        "url": "http://www.google.com"
+      }
+    },
+    {
+      "id": 2,
+      "message": "message only, there is no action"
+    },
+    {
+      "id": 3,
+      "action": {
+        "label": "Action only",
+        "url": "http://www.google.com"
+      }
+    }
+  ]
+}
