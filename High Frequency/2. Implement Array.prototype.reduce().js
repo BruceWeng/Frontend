@@ -2,9 +2,9 @@
  * Write a function reduce(func: function, initialState: any): any
  * behaves the same as Array.prototype.reduce().
  */
-Array.prototype.myreduce = function (func, initialValue) {
+Array.prototype.myreduce = function(func, initialValue) {
   let result = initialValue;
-  for (const current of this) { // 'this' is the array calls myreduce
+  for(const current of this) { // 'this' is the array calls myreduce
     result = func(result, current);
   }
   return result;
