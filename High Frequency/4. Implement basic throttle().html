@@ -33,7 +33,7 @@
       let last_time = 0;
       return (...args) => {
         let now = new Date().getTime();
-        if (now - last_time < wait) return;
+        if(now-last_time<wait) return;
         last_time = now;
         return func(...args);
       }
