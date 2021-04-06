@@ -5,12 +5,12 @@ class StopWatch {
   }
   
   start() {
-    if (this.start_at === 0) this.start_at = new Date().getTime();
+    if(this.start_at===0) this.start_at = new Date().getTime();
   }
   
   stop() {
-    if (this.start_at !== 0) {
-      this.last_stop_time += new Date().getTime() - this.start_at;
+    if(this.start_at!==0) {
+      this.last_stop_time += new Date().getTime()-this.start_at;
       this.start_at = 0;
     }
   }
@@ -21,8 +21,8 @@ class StopWatch {
   }
   
   duration() {
-    if (this.start_at !== 0) {
-      this.last_stop_time += new Date().getTime() - this.start_at;
+    if(this.start_at!==0) {
+      this.last_stop_time += new Date().getTime()-this.start_at;
     }
     return this.last_stop_time;
   }
