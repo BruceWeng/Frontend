@@ -3,7 +3,8 @@
  */
 function sum(num) {
   function partialSum(nextNum) {
-    return nextNum ? sum(num + nextNum) : num;
+    return nextNum ? sum(num+nextNum) 
+      : num;
   }
   /*
     In order to get the result of sum(1)(2)(3)...(N), there are 2 options:
