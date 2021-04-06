@@ -38,13 +38,14 @@ console.log(flat(user));
 */
 function flat(obj, depth=Infinity, parent_key='') {
   let result = {};
-  for (const key in obj) {
-    const new_key = parent_key === '' ? key : `${parent_key}_${key}`;
-    if (typeof obj[key] === "object" && depth > 0) {
+  for(const key in obj) {
+    const new_key = parent_key==='' ? key 
+      : `${parent_key}_${key}`;
+    if(typeof obj[key]==="object" && depth>0) {
       result = {...result, ...flat(obj[key], depth-1, new_key)};
-    } else {
-      result[new_key] = obj[key];
+      continue
     }
+    result[new_key] = obj[key];
   }
   return result;
 };
@@ -54,16 +55,17 @@ function flat(obj, depth=Infinity) {
   const stack = [...Object.keys(obj).map(key => {
     return [obj[key], depth, key];
   })];
-  while (stack.length !== 0) {
+  while(stack.length!==0) {
     const [current, depth, parent_key] = stack.pop(); // current = object | value
-    if (typeof current === 'object' && depth > 0) {
+    if(typeof current==='object' && depth>0) {
       stack.push(...Object.keys(current).map(key => {
-        const new_key = parent_key === '' ? key : `${parent_key}_${key}`;
+        const new_key = parent_key==='' ? key 
+          : `${parent_key}_${key}`;
         return [current[key], depth-1, new_key];
       }));
-    } else {
-      result[parent_key] = current;
+      continue
     }
+    result[parent_key] = current;
   }
   return result;
 }
