@@ -13,10 +13,10 @@
 // target is a pointer to a HTMLElement in rootA tree.
 // Recursion
 function findCorrespondingNode(rootA, rootB, target) {
-  if (rootA === target) return rootB;
-  for (let i = 0; i < rootA.children.length; i++) {
+  if(rootA===target) return rootB;
+  for(let i=0; i<rootA.children.length; i++) {
     const result = findCorrespondingNode(rootA.children[i], rootB.children[i], target);
-    if (result !== null) return result;
+    if(result!==null) return result;
   }
   return null;
 }
@@ -25,10 +25,10 @@ function findCorrespondingNode(rootA, rootB, target) {
 const findCorrespondingNode = (rootA, rootB, target) => {
   const stackA = [rootA];
   const stackB = [rootB];
-  while (stackA.length !== 0) {
+  while(stackA.length!==0) {
     const nodeA = stackA.pop();
     const nodeB = stackB.pop();
-    if (nodeA === target) return nodeB;
+    if(nodeA===target) return nodeB;
     stackA.push(...nodeA.children);
     stackB.push(...nodeB.children);
   }
@@ -37,10 +37,10 @@ const findCorrespondingNode = (rootA, rootB, target) => {
 
 // Trace path from target to rootA with index in path[]
 function findCorrespondingNode(rootA, rootB, target) {
-  if (rootA === target) return rootB;
+  if(rootA===target) return rootB;
   const path = [];
   let node = target;
-  while (node !== rootA) {
+  while(node!==rootA) {
     const parent = node.parentElement;
     const index = [...parent.children].indexOf(node);
     path.push(index);
@@ -57,19 +57,17 @@ const ACTION = {
 
 const findCorrespondingNode = (rootA, rootB, target) => {
   // your code here
-  if (rootA === target) return rootB;
+  if(rootA===target) return rootB;
   // preorder
   let childrenA = [...rootA.children].reverse();
   let childrenB = [...rootB.children].reverse();
   const stackA = [...childrenA.map((child) => [child, ACTION.VISIT])];
   const stackB = [...childrenB];
-  while (stackA.length !== 0) {
+  while(stackA.length!==0) {
     const [nodeA, next_action] = stackA.pop();
     const nodeB = stackB.pop();
-    if (next_action === ACTION.COMPARE) {
-      if (nodeA === target) return nodeB;
-      continue;
-    }
+    if(next_action===ACTION.COMPARE && nodeA===target) return nodeB;
+    if(next_action===ACTION.COMPARE && nodeA!==target) continue
     //reverse action
     childrenA = [...nodeA.children].reverse();
     childrenB = [...nodeB.children].reverse();
