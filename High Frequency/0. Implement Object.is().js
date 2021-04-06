@@ -14,7 +14,7 @@
  * @return {boolean}
  */
 function is(a, b) {
-  if (a === 0 && b === 0) return (1 / a === 1 / b);
-  if (Number.isNaN(a) && Number.isNaN(b)) return true;
-  return a === b;
+  if(a===0 && b===0) return (1/a===1/b);
+  if(Number.isNaN(a) && Number.isNaN(b)) return true;
+  return a===b;
 }
