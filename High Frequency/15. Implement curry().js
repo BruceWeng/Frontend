@@ -5,13 +5,11 @@
  */
 function curry(func) {
   return function curried(...args) {
-    if (args.length >= func.length) { // function.length return how many args it expects
+    return (args.length>=func.length) // function.length return how many args it expects
       // 1
-      return func.call(this, ...args); // return value
-    } else {
+      ? func.call(this, ...args) // return value
       // 2
-      return curried.bind(this, ...args); // return function
-    }
+      : curried.bind(this, ...args); // return function
   };
 }
 
