@@ -7,7 +7,7 @@
  */
 const observer = {
   next: (value) => {
-     console.log('we got a value', value)
+    console.log('we got a value', value)
   },
   error: (error) => {
     console.log('we got an error', error)
@@ -30,20 +30,20 @@ class Observable {
         isUnsubscribed = true;
       },
       next(value) {
-        if (isUnsubscribed) return;
+        if(isUnsubscribed) return;
         // if a func is passed in as an obsever, it is treated as next
-        if (observer instanceof Function) observer(value);
-        if (observer.next) observer.next(value);
+        if(observer instanceof Function) observer(value);
+        if(observer.next) observer.next(value);
       },
       error(reason) {
-        if (isUnsubscribed) return;
+        if(isUnsubscribed) return;
         isUnsubscribed = true;
-        if (observer.error) observer.error(reason);
+        if(observer.error) observer.error(reason);
       },
       complete() {
-        if (isUnsubscribed) return;
+        if(isUnsubscribed) return;
         isUnsubscribed = true;
-        if (observer.complete) observer.complete();
+        if(observer.complete) observer.complete();
       }
 
     }
@@ -52,7 +52,7 @@ class Observable {
   }
 }
 
-const observable = new Observable((observer)=> {
+const observable = new Observable((observer) => {
   observer.next(1)
   observer.next(2)
   setTimeout(() => {
