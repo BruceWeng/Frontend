@@ -3,7 +3,7 @@ class EventEmitter {
   subscribe(eventName, callback) {
   	this.subscribers[eventName] = this.subscribers[eventName] || [];
     this.subscribers[eventName].push(callback);
-    const index = this.subscribers.length - 1;
+    const index = this.subscribers.length-1;
     const EventEmitter = this;
     return {
       release() {
@@ -14,7 +14,7 @@ class EventEmitter {
   
   emit(eventName, ...args) {
   	const callbacks = this.subscribers[eventName];
-    for (const callback of callbacks) {
+    for(const callback of callbacks) {
       callback(...args);
     }
   }
