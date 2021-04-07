@@ -4,12 +4,12 @@
  */
 function flatten(root) {
   // your code here
-  if (root === null) return [];
+  if(root===null) return [];
   const result = [];
   const queue = [root];
-  while (queue.length !== 0) {
+  while(queue.length!==0) {
     let size = queue.length;
-    while (size > 0) {
+    while(size>0) {
       const node = queue.shift();
       result.push(node);
       queue.push(...node.children);
