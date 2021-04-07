@@ -8,13 +8,13 @@ const obj = {
 }
 
 function profile(times) {
-  for (let i = 0; i < times; i++) {
+  for(let i=0; i<times; i++) {
     console.log(`${this.name} from ${this.state}`);
   }
 }
 
 function sum(a, b) {
-  return a + b;
+  return a+b;
 }
 
 Function.prototype.myBind = function(context, ...args) {
