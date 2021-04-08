@@ -7,17 +7,17 @@ class TreeNode {
   }
 }
 function insertNode(node, key) {
-  if (node === null) {
+  if(node===null) {
     node = new TreeNode(key);
     return node;
   }
-  if (key < node.key) node.left = insertNode(node.left, key);
-  else node.right = insertNode(node.right, key);
+  if(key<node.key) node.left = insertNode(node.left, key);
+  if(key>=node.key) node.right = insertNode(node.right, key);
   return node;
 }
 
 function inorder(node, result=[]) {
-  if (node == null) return;
+  if(node==null) return;
   inorder(node.left, result);
   result.push(node.key);
   inorder(node.right, result);
@@ -25,25 +25,25 @@ function inorder(node, result=[]) {
 }
 
 function minValueNode(node) {
-  while (node.left !== null) node = node.left;
+  while(node.left!==null) node = node.left;
   return node;
 }
 
 function deleteNode(node, key) {
-  if (node === null) return node;
-  if (key < node.key) node.left = deleteNode(node.left, key);
-  if (key > node.key) node.right= deleteNode(node.right, key);
-  if (key === node.key) {
-    if (node.left === null) {
-      let new_node = node.right;
-      node = null;
-      return new_node;
-    }
-    if (node.right === null) {
-      let new_node = node.left;
-      node = null;
-      return new_node;
-    }
+  if(node===null) return node;
+  if(key<node.key) node.left = deleteNode(node.left, key);
+  if(key>node.key) node.right= deleteNode(node.right, key);
+  if(key===node.key && node.left===null) {
+    let new_node = node.right;
+    node = null;
+    return new_node;
+  }
+  if(key===node.key && node.right===null) {
+    let new_node = node.left;
+    node = null;
+    return new_node;
+  }
+  if(key===node.key) {
     // If both children are not null
     // Replace inorder successor (next larger node of target) key to this node 
     let successor = minValueNode(node.right);
@@ -56,22 +56,22 @@ function deleteNode(node, key) {
 
 // lowerBound: among all the nodes that node.key > target.key, find the minimum node
 function successor(node, target) {
-  if (node === null) return null;
-  if (node.key > target.key) {
+  if(node===null) return null;
+  if(node.key>target.key) {
     let left = successor(node.left, target);
-    return left !== null ? left : node;
+    return left!==null ? left : node;
   }
-  else return successor(node.right, target);
+  if(node.key<=target.key) return successor(node.right, target);
 }
 
 // upperBound: among all the nodes that node.key < target.key, find the maximum node
 function predecessor(node, target) {
-  if (node === null) return null;
-  if (node.key < target.key) {
+  if(node===null) return null;
+  if(node.key<target.key) {
     let right = predecessor(node.right, target);
-    return right !== null ? right : node;
+    return right!==null ? right : node;
   }
-  else return predecessor(node.left, target);
+  if(node.key>=target.key) return predecessor(node.left, target);
 }
 
 let root = new TreeNode(1);
