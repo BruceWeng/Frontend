@@ -11,7 +11,7 @@ class DisjointSets {
    * @return {number}
    */
   find(a) {
-    while (this.parents[a] !== a) a = this.parents[a];
+    while(this.parents[a]!==a) a = this.parents[a];
     return a;
   }
 
@@ -26,11 +26,11 @@ class DisjointSets {
     const parent_a = this.find(a);
     const parent_b = this.find(b);
     
-    if (parent_a === parent_b) return true;
+    if(parent_a===parent_b) return true;
     
-    if (this.ranks[parent_a] > this.ranks[parent_b]) this.parents[parent_b] = parent_a;
-    if (this.ranks[parent_b] > this.ranks[parent_a]) this.parents[parent_a] = parent_b;
-    if (this.ranks[parent_a] === this.ranks[parent_b]) {
+    if(this.ranks[parent_a]>this.ranks[parent_b]) this.parents[parent_b] = parent_a;
+    if(this.ranks[parent_b]>this.ranks[parent_a]) this.parents[parent_a] = parent_b;
+    if(this.ranks[parent_a]===this.ranks[parent_b]) {
       this.parents[parent_b] = parent_a;
       this.ranks[parent_a]++;
     }
