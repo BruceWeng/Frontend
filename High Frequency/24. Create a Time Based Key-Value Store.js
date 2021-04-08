@@ -15,21 +15,20 @@ class TimeMap {
   }
 
   set(key, value, timestamp) {
-    if (this.store[key] === undefined) this.store[key] = [];
+    if(this.store[key]===undefined) this.store[key] = [];
     this.store[key].push({ timestamp, value });
   }
 
   get(key, timestamp) {
     const list = this.store[key];
     let left = 0, right = list.length; // [left, right)
-    while (left < right) {
-      const mid = left + ((right - left) >> 1); // remember ()
-      if (list[mid].timestamp > timestamp) // condition
-        right = mid; 
-      else left = mid+1;
+    while(left<right) {
+      const mid = left+((right-left)>>1); // remember ()
+      if(list[mid].timestamp>timestamp) right = mid; 
+      if(list[mid].timestamp<=timestamp) left = mid+1;
     }
     // after exiting the while loop, left is the minimal k​ satisfying the condition function
-    if (left === 0) return "";
+    if(left===0) return "";
     else return list[left-1].value;
   }
 }
