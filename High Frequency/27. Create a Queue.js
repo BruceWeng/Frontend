@@ -11,7 +11,7 @@ class Q {
 
   enqueue(node) {
     const new_node = { node, next: null };
-    if (this.head === null) this.head = this.tail = new_node;
+    if(this.head===null) this.head = this.tail = new_node;
     else {
       this.tail.next = new_node;
       this.tail = new_node;
@@ -21,7 +21,7 @@ class Q {
   }
 
   dequeue() {
-    if (this.head === null) return null;
+    if(this.head===null) return null;
     const current = this.head;
     this.head = this.head.next;
     this.size--;
