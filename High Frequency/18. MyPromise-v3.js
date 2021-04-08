@@ -454,7 +454,7 @@ class MyPromise {
       } else {
         // change state to SUCCEEDED and let future 'then' handle
         this.state = this.STATE.SUCCEEDED;
-        this.value = succeeded_result;
+        this.value = failed_result;
       }
     } catch(reason) {
       this.state = this.STATE.FAILED;
