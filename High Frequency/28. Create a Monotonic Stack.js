@@ -6,16 +6,16 @@ const target = [3, 5, 11, 17, 7, 13];
 
 // Decreasing stack: find Next Greater Element
 function nextGreaterElement(target) {
-  if (target == null 
-    || Array.isArray(target) === false
-    || target.some((e) => typeof e !== 'number')) 
+  if(target==null 
+    || Array.isArray(target)===false
+    || target.some((e) => typeof e!=='number')) 
     return new TypeError('Invalid input');
-    if (target.length === 0) return [];
+    if(target.length===0) return [];
     
     const stack = [];
     const result = new Array(target.length).fill(-1);
-    for (let i = 0; i < target.length; i++) {
-      while (stack.length !== 0 && target[stack[stack.length-1]] < target[i]) {
+    for(let i=0; i<target.length; i++) {
+      while(stack.length!==0 && target[stack[stack.length-1]]<target[i]) {
         result[stack.pop()] = target[i];
       }
       stack.push(i);
@@ -32,8 +32,8 @@ console.log(nextGreaterElement(target)); // [ 5, 11, 17, -1, 13, -1 ]
 function nextLessElement(target) {
   const stack = [];
   const result = new Array(target.length).fill(-1);
-  for (let i = 0; i < target.length; i++) {
-    while (stack.length !== 0 && target[stack[stack.length-1]] > target[i]) {
+  for(let i=0; i<target.length; i++) {
+    while(stack.length!==0 && target[stack[stack.length-1]]>target[i]) {
       result[stack.pop()] = target[i];
     }
     stack.push(i);
@@ -47,11 +47,11 @@ console.log(nextLessElement(target)); // [ -1, -1, 7, 7, -1, -1 ]
 function prevGreaterElement(target) {
   const stack = [];
   const result = new Array(target.length).fill(-1);
-  for (let i = 0; i < target.length; i++) {
-    while (stack.length !== 0 && target[stack[stack.length-1]] < target[i]) {
+  for(let i=0; i<target.length; i++) {
+    while(stack.length!==0 && target[stack[stack.length-1]]<target[i]) {
       stack.pop();
     }
-    if (stack.length !== 0) result[i] = target[stack[stack.length-1]];
+    if(stack.length!==0) result[i] = target[stack[stack.length-1]];
     stack.push(i);
   }
   return result;
@@ -63,11 +63,11 @@ console.log(prevGreaterElement(target)); // [ -1, -1, -1, -1, 17, 17 ]
 function prevLessElement(target) {
   const stack = [];
   const result = new Array(target.length).fill(-1);
-  for (let i = 0; i < target.length; i++) {
-    while (stack.length !== 0 && target[stack[stack.length-1]] > target[i]) {
+  for(let i=0; i<target.length; i++) {
+    while(stack.length!==0 && target[stack[stack.length-1]]>target[i]) {
       stack.pop();
     }
-    if (stack.length !== 0) result[i] = target[stack[stack.length-1]];
+    if(stack.length!==0) result[i] = target[stack[stack.length-1]];
     stack.push(i);
   }
   return result;
