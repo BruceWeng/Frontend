@@ -20,8 +20,8 @@ class Trie {
  */
   insert(word) {
     let current = this.root;
-    for (const char of word) {
-      if (current.children[char] === undefined) current.children[char] = new TrieNode();
+    for(const char of word) {
+      if(current.children[char]===undefined) current.children[char] = new TrieNode();
       current = current.children[char];
     }
     current.isWord = true;
@@ -34,8 +34,8 @@ class Trie {
  */
   search(word) {
     let current = this.root;
-    for (const char of word) {
-      if (current.children[char] === undefined) return false;
+    for(const char of word) {
+      if(current.children[char]===undefined) return false;
       current = current.children[char];
     }
     return current.isWord;
@@ -48,8 +48,8 @@ class Trie {
  */
   startsWith(prefix) {
     let current = this.root;
-    for (const char of prefix) {
-      if (current.children[char] === undefined) return false;
+    for(const char of prefix) {
+      if(current.children[char]===undefined) return false;
       current = current.children[char];
     }
     return true;
