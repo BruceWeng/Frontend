@@ -26,7 +26,7 @@ class DLList {
   }
 
   isEmpty() {
-    return this.size === 0;
+    return this.size===0;
   }
 
   delete(node) {
@@ -38,7 +38,7 @@ class DLList {
    * @return {number | null}
    */
   removeLast() {
-    if (this.size === 0) return null;
+    if(this.size===0) return null;
     const node = this.tail.prev;
     this.delete(node);
     return node;
@@ -65,16 +65,17 @@ class LFUCache {
   update(node) {
     const freq = node.freq;
     this.freq_map[freq].delete(node);
-    if (freq === this.min_freq 
+    if(freq===this.min_freq 
       && this.freq_map[freq].isEmpty()) 
       this.min_freq++;
 
     node.freq++;
-    if (this.freq_map[node.freq] === undefined) {
+    if(this.freq_map[node.freq]===undefined) {
       const new_list = new DLList(node.freq);
       new_list.attachToHead(node);
       this.freq_map[node.freq] = new_list;
-    } else {
+    } 
+    if(this.freq_map[node.freq]!==undefined) {
       this.freq_map[node.freq].attachToHead(node);
     }
     return node.val;
@@ -85,7 +86,7 @@ class LFUCache {
    * @return {number}
    */
   get(key) {
-    if (this.key_map[key] === undefined) return -1;
+    if(this.key_map[key]===undefined) return -1;
     const node = this.key_map[key];
     return this.update(node);
   }
@@ -96,8 +97,8 @@ class LFUCache {
    * @return {void}
    */
   put(key, value) {
-    if (this.capacity === 0) return;
-    if (key in this.key_map) {
+    if(this.capacity===0) return;
+    if(key in this.key_map) {
       const node = this.key_map[key];
       node.val = value;
       this.update(node);
@@ -106,7 +107,7 @@ class LFUCache {
 
     // if key not in key_map
     // 1. remove least freq node
-    if (this.size === this.capacity) {
+    if(this.size===this.capacity) {
       const old_node = this.freq_map[this.min_freq].removeLast();
       delete this.key_map[old_node.key];
       this.size--;
