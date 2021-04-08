@@ -21,7 +21,7 @@ class LRUCache {
 
   get(key) {
     const node = this.map[key];
-    if (node !== undefined) {
+    if(node!==undefined) {
       this.moveToHead(node);
       return node.val;
     }
@@ -30,16 +30,17 @@ class LRUCache {
 
   put(key, value) {
     let node = this.map[key];
-    if (node !== undefined) {
+    if(node!==undefined) {
       node.val = value;
       this.moveToHead(node);
-    } else {
+    } 
+    if(node===undefined) {
       node = new ListNode(key, value);
       this.attachToHead(node);
       this.size++;
     }
 
-    if (this.size > this.capacity) {
+    if(this.size>this.capacity) {
       this.removeLast();
       this.size--;
     }
