@@ -389,7 +389,8 @@ class MyPromise {
     this.reject = this.reject.bind(this);
     try {
       executor(this.resolve, this.reject);
-    } catch (reason) {
+    } 
+    catch (reason) {
       this.reject(reason);
     }
   }
@@ -399,12 +400,9 @@ class MyPromise {
     this.state = this.STATE.SUCCEEDED;
     this.value = value;
     for (const { type, onSucceeded, onFailed } of this.handlers) {
-      if (type === this.TYPE.THEN) {
-        this.succeed(onSucceeded);
-        if (this.state === this.STATE.FAILED) {
-          return this.reject(this.value);
-        }
-      }
+      if (type === this.TYPE.THEN) this.succeed(onSucceeded);
+      if (type === this.TYPE.THEN && this.state === this.STATE.FAILED) 
+        return this.reject(this.value);
     }
     this.handlers.length = 0;
   }
@@ -414,49 +412,41 @@ class MyPromise {
     this.state = this.STATE.FAILED;
     this.value = reason;
     for (const { type, onSucceeded, onFailed } of this.handlers) {
-      if (type === this.TYPE.CATCH) {
-        this.fail(onFailed);
-        // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
-        if (this.state = this.STATE.SUCCEEDED) {
-          return this.resolve(this.value);
-        }
-      }
+      if (type === this.TYPE.CATCH) this.fail(onFailed);
+      // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
+      if (type === this.TYPE.CATCH && this.state === this.STATE.SUCCEEDED) 
+        return this.resolve(this.value);
     }
     this.handlers.length = 0;
   }
 
   succeed(onSucceeded) {
-    if (typeof onSucceeded !== 'function') {
-      onSucceeded = () => this.value;
-    }
+    if (typeof onSucceeded !== 'function') onSucceeded = () => this.value;
     try {
       const succeeded_result = onSucceeded(this.value);
-      if (succeeded_result instanceof MyPromise) {
+      if (succeeded_result instanceof MyPromise) 
         this.chainPromise(succeeded_result);
-      } else {
-        // Keep state as PENDING
-        this.value = succeeded_result;
-      }
-    } catch(reason) {
+      else this.value = succeeded_result; // Keep state as PENDING
+    } 
+    catch (reason) {
       this.state = this.STATE.FAILED;
       this.value = reason;
     }
   }
 
   fail(onFailed) {
-    if (typeof onFailed !== 'function') {
-      onFailed = () => this.value;
-    }
+    if (typeof onFailed !== 'function') onFailed = () => this.value;
     try {
       const failed_result = onFailed(this.value);
-      if (failed_result instanceof MyPromise) {
+      if (failed_result instanceof MyPromise) 
         this.chainPromise(failed_result);
-      } else {
+      else {
         // change state to SUCCEEDED and let future 'then' handle
         this.state = this.STATE.SUCCEEDED;
         this.value = failed_result;
       }
-    } catch(reason) {
+    } 
+    catch (reason) {
       this.state = this.STATE.FAILED;
       this.value = reason;
     }
@@ -468,24 +458,26 @@ class MyPromise {
     this.handlers = promise.handlers;
 
     for (const key of Object.keys(MyPromise.prototype)) {
-      if (typeof this[key] === 'function') {
+      if (typeof this[key] === 'function') 
         this[key] = this[key].bind(promise);
-      }
     }
   }
 
   then(onSucceeded, onFailed) {
     queueMicrotask(() => {
       switch (this.state) {
-        case this.STATE.PENDING:
+        case this.STATE.PENDING: {
           this.handlers.push({ type: this.TYPE.THEN, onSucceeded, onFailed });
           break;
-        case this.STATE.SUCCEEDED:
+        }
+        case this.STATE.SUCCEEDED: {
           this.succeed(onSucceeded);
           break;
-        case this.STATE.FAILED:
+        }
+        case this.STATE.FAILED: {
           if (typeof onFailed === 'function') this.fail(onFailed);
           break;
+        }
       }
     });
     return this;
@@ -494,12 +486,14 @@ class MyPromise {
   catch(onFailed) {
     queueMicrotask(() => {
       switch (this.state) {
-        case this.STATE.PENDING:
+        case this.STATE.PENDING: {
           this.handlers.push({ type: this.TYPE.CATCH, onFailed });
           break;
-        case this.STATE.FAILED:
+        }
+        case this.STATE.FAILED: {
           this.fail(onFailed);
           break;
+        }
       }
     });
     return this;
