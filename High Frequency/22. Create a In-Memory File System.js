@@ -14,21 +14,21 @@ class FileSystem {
     let current = this.root;
     let dir_name = '';
     const directories = path.split('/');
-    for (const dir of directories) {
-      if (dir.length === 0) continue;
+    for(const dir of directories) {
+      if(dir.length===0) continue;
       current = current.children[dir];
       dir_name = dir;
     }
-    if (current.isFile === true) return [dir_name];
+    if(current.isFile===true) return [dir_name];
     else return Object.keys(current.children).sort();
   }
 
   mkdir(path) {
     let current = this.root;
     const directories = path.split('/');
-    for (const dir of directories) {
-      if (dir.length === 0) continue;
-      if (current.children[dir] === undefined) current.children[dir] = new FileNode();
+    for(const dir of directories) {
+      if(dir.length===0) continue;
+      if(current.children[dir]===undefined) current.children[dir] = new FileNode();
       current = current.children[dir];
     }
     return null;
@@ -37,9 +37,9 @@ class FileSystem {
   addContentToFile(path, content) {
     let current = this.root;
     const directories = path.split('/');
-    for (const dir of directories) {
-      if (dir.length === 0) continue;
-      if (current.children[dir] === undefined) current.children[dir] = new FileNode();
+    for(const dir of directories) {
+      if(dir.length===0) continue;
+      if(current.children[dir]===undefined) current.children[dir] = new FileNode();
       current = current.children[dir];
     }
     current.isFile = true;
@@ -50,8 +50,8 @@ class FileSystem {
   readContentFromFile(path) {
     let current = this.root;
     const directories = path.split('/');
-    for (const dir of directories) {
-      if (dir.length === 0) continue;
+    for(const dir of directories) {
+      if(dir.length===0) continue;
       current = current.children[dir];
     }
     return current.content;
