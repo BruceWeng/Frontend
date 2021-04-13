@@ -69,28 +69,28 @@
 |   |               | 3 | 71. Implement Observable Subject |
 
 ## Part 2: Widget Design
-| # | Question | Pure JS | React | Fetch data | Pure CSS |
-|:-:|----------|:-------:|:-----:|:----------:|:--------:|
-| 1 | Light out game | &check; | &check; | - | - |
-| 2 | Calendar | &check; |  | - | - |
-| 3 | Tic Tac Toe Game |  | &check; | - | - |
-| 4 | Star rating | - | - | - | &check; |
-| 5 | Poll |  |  | - |  |
-| 6 | Light box |  |  | - |  |
-| 7 | Click outside to close drop down |  |  | - |  |
-| 8 | Accordion |  |  | - |  |
-| 9 | Infinite scroller |  |  | - |  |
-| 10 | File uploader |  |  | - |  |
-| 11 | Carousel |  |  | &check; |  |
-| 12 | Render {JSON}Placehoder data |  |  | &check; |  |
-| 13 | Pagination |  |  | &check; |  |
-| 14 | Todo app CRUD |  |  | &check; |  |
-| 15 | Autocompolete |  |  | &check; |  |
-| 16 | Fuzzy search |  |  | &check; |  |
-| 17 | Excel table (calculated cell, sort, filter) |  |  | &check; |  |
-| 18 | Download Progress bar |  |  | &check; |  |
-| 19 | Toast Notification |  |  |  |  |
-| 20 | Snake Game |  |  |  |  |
+| # | Question                                     | Pure JS |  React  | React Testing | Fetch data | Trasition |
+|:-:|----------------------------------------------|:-------:|:-------:|:-------------:|:----------:|:---------:|
+| 1 | Light out game                               | &check; | &check; |     @TODO     |   @TODO    |   @TODO   |
+| 2 | Calendar                                     | &check; | &check; |     &check;   |   @TODO    |   @TODO   |
+| 3 | Tic Tac Toe Game                             |  @TODO  | &check; |     @TODO     |   @TODO    |   @TODO   |
+| 4 | Star rating                                  |    -    |    -    |       -       |     -      |   @TODO   |
+| 5 | Poll                                         |  @TODO  |  @TODO  |     @TODO     |   &check;  |   @TODO   |
+| 6 | Light box                                    |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 7 | Click outside to close drop down             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 8 | Accordion                                    |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 9 | Carousel                                     |  @TODO  | &check; |     @TODO     |   &check;  |   @TODO   |
+| 10 | Download Progress bar                       |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 11 | Toast Notification                          |  @TODO  | &check; |     @TODO     |   &check;  |   @TODO   |
+| 12 | Snake Game                                  |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 13 | Excel table (calculated cell, sort, filter) |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.a | Todo app CRUD                             |  @TODO  | &check; |     @TODO     |   &check;  |   @TODO   |
+| 14.b | Render JSON server data                   |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.c | Infinite scroller                         |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.d | File uploader                             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.e | Pagination                                |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.f | Autocompolete                             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.g | Fuzzy search                              |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 
 ## Part 3: Performance
 ### What happend when enter a url:
