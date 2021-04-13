@@ -1,79 +1,100 @@
 import './App.css';
 import {TodoContext, TodoProvider, ACTIONS} from './TodoContext.js'
 import {useContext, useEffect, useState} from 'react'
-
 function TodoContainer() {
-  const [todos, dispatch] = useContext(TodoContext)
+  const [todo, dispatch] = useContext(TodoContext)
   const [searchInput, setSearchInput] = useState('')
-
   useEffect(() => {
-    console.log(searchInput)
-    console.log(todos)
-  }, [searchInput, todos])
+    dispatch({type: ACTIONS.TODOS_ISLOADING, payload: {isLoading: true}})
+    fetch('http://localhost:5000/todos')
+    .then(response => {
+      dispatch({type: ACTIONS.TODOS_ISLOADING, payload: {isLoading: false}})
+      console.log('success loading')
+      return response.json()
+    })
+    .then(json => dispatch({type: ACTIONS.TODOS_INITIALIZED, payload: {items: json}}))
+    .catch(reason => {
+      dispatch({type: ACTIONS.TODOS_ISLOADING, payload: {isLoading: false}})
+      console.error(`Todos loading failed: ${reason}`)
+    })
+  }, [dispatch])
 
-  const handleTodoCheck = (todo) => {
+  const handleTodoCheck = (item) => {
     dispatch({
       type: ACTIONS.TODO_UPDATED,
       payload: {
-        ...todo,
-        isComplete: !todo.isComplete
+        item: {
+          ...item,
+          isComplete: !item.isComplete
+        }
       }
     })
   }
 
-  const handleTodoChange = (e, todo) => {
+  const handleTodoChange = (e, item) => {
     dispatch({
       type: ACTIONS.TODO_UPDATED,
       payload: {
-        ...todo,
-        editingVal: e.target.value
+        item: {
+          ...item,
+          editingVal: e.target.value
+        }
       }
     })
   }
 
-  const handleTodoEditingStatus = (todo) => {
-    if (todo.isComplete) return
+  const handleTodoEditingStatus = (item) => {
+    if (item.isComplete) return
     dispatch({
       type: ACTIONS.TODO_UPDATED,
       payload: {
-        ...todo,
-        editingVal: todo.val,
-        isEditing: !todo.isEditing
+        item: {
+          ...item,
+          editingVal: item.val,
+          isEditing: !item.isEditing
+        }
       }
     }) 
   }
 
   const handleInputBtnSubmit = (e) => {
+    console.log('in handleInputBtnSubmit')
     e.preventDefault()
     dispatch({
       type: ACTIONS.TODO_ADDED, 
       payload: {
-        id: Date.now(), 
-        val: searchInput, 
-        isComplete: false,
-        editingVal: searchInput,
-        isEditing: false
+        item: {
+          id: Date.now(),
+          val: searchInput, 
+          isComplete: false,
+          editingVal: searchInput,
+          isEditing: false
+        }
       }
     })
     setSearchInput(() => '')
   }
 
-  const handleTodoSaveClick = (todo) => {
+  const handleTodoSaveClick = (item) => {
     dispatch({
       type: ACTIONS.TODO_UPDATED,
       payload: {
-        ...todo,
-        val: todo.editingVal,
-        isEditing: false
+        item: {
+          ...item,
+          val: item.editingVal,
+          isEditing: false
+        }
       }
     })
   }
 
-  const handleTodoDeleteClick = (todo) => {
+  const handleTodoDeleteClick = (item) => {
     dispatch({
       type: ACTIONS.TODO_DELETED,
       payload: {
-        id: todo.id
+        item: {
+          id: item.id
+        }
       }
     })
   }
@@ -87,21 +108,21 @@ function TodoContainer() {
         </form>
       </div>
       <div className="Todo__items">
-        <ul>{todos.map((todo) => 
-          <li className="Todo__item" key={todo.id}>
+        <ul>{todo.items.map((item) => 
+          <li className="Todo__item" key={item.id}>
             <div>
-              <input type="checkbox" onClick={() => handleTodoCheck(todo)}></input>
-              {todo.isEditing 
-                ? <input value={todo.editingVal} 
-                         autoFocus="autofocus"
-                         onChange={(e) => handleTodoChange(e, todo)}
-                         onKeyUp={(e) => e.key === 'Enter' ? handleTodoSaveClick(todo) : null}></input>
-                : <span className={`${todo.isComplete ? 'Todo__content--cross' : 'Todo__content'}`} 
-                        onClick={() => handleTodoEditingStatus(todo)}>
-                    {todo.val}
+              <input type="checkbox" onClick={() => handleTodoCheck(item)}></input>
+              {item.isEditing 
+                ? <input value={item.editingVal} 
+                        autoFocus="autofocus"
+                        onChange={(e) => handleTodoChange(e, item)}
+                        onKeyUp={(e) => e.key === 'Enter' ? handleTodoSaveClick(item) : null}></input>
+                : <span className={`${item.isComplete ? 'Todo__content--cross' : 'Todo__content'}`} 
+                        onClick={() => handleTodoEditingStatus(item)}>
+                    {item.val}
                   </span>}
-                <button className="Todo__item--delete" onClick={() => handleTodoDeleteClick(todo)}>Delete</button>
             </div>
+            <button className="Todo__item--delete" onClick={() => handleTodoDeleteClick(item)}>Delete</button>
           </li>)}
         </ul>
       </div>

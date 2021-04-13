@@ -1,0 +1,53 @@
+html {
+  font-size: 15px;
+  font-family: sans-serif;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+button {
+  cursor: pointer;
+}
+.Todo__container {
+  margin: 1rem;
+}
+.Todo__post-input {
+  display: flex;
+  justify-content: center;  
+}
+.Todo__items {
+  display: flex;
+  justify-content: center;  
+}
+.Todo__item {
+  border: solid black 1px;
+  margin: 2px;
+  width: 25rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.Todo__content {
+  cursor: pointer;
+}
+.Todo__content--cross {
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.Todo__item--cancel {
+  width: 4rem;
+  margin: 2px;
+  color: hsl(0, 100%, 50%);
+}
+.Todo__item--save {
+  width: 4rem;
+  margin: 2px;
+  color: hsl(120, 100%, 30%);
+}
+.Todo__item--delete {
+  width: 4rem;
+  margin: 2px;
+  background-color: hsl(0, 100%, 50%);
+  color : white;
+}
