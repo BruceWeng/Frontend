@@ -17,8 +17,8 @@ class PriorityQueue {
   add(...values) {
     values.forEach(value => {
       this.heap.push(value)
-      this.siftUp(this.size()-1)
-    });
+      this.shiftUp(this.size()-1)
+    })
     return this.size()
   }
   poll() {
@@ -26,7 +26,7 @@ class PriorityQueue {
     let root = this.heap[this.top]
     this.heap[this.top] = this.heap[this.size()-1]
     this.heap.pop()
-    this.siftDown(this.top)
+    this.shiftDown(this.top)
     return root
   }
   // Helper functions
@@ -36,7 +36,7 @@ class PriorityQueue {
   swap(a, b) {
     [ this.heap[a], this.heap[b] ] = [ this.heap[b], this.heap[a] ]
   }
-  siftUp(index) {
+  shiftUp(index) {
     while(index>0) {
       let parent_index = this.parent(index)
       if(this.more(parent_index, index)) break
@@ -44,17 +44,17 @@ class PriorityQueue {
       index = parent_index
     }
   }
-  siftDown(index) {
+  shiftDown(index) {
     while(true) {
       let swap_index = null
       let right_index = this.right(index)
       let left_index = this.left(index)
 
-      if(left_index<this.size() 
+      if(left_index<this.size()
         && this.more(left_index, index)) swap_index = left_index
 
-      if(right_index<this.size() 
-        && this.more(right_index, index) 
+      if(right_index<this.size()
+        && this.more(right_index, index)
         && this.more(right_index, left_index)) swap_index = right_index
 
       if(swap_index===null) break
