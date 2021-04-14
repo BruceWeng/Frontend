@@ -17,13 +17,13 @@ function search(space, target) {
 }
 
 function lowerBound(space, target) {
-  let left = 0, right = space.length; // right = N
+  let left = 0, right = space.length-1; // right = N - 1
   while(left<right) { // left < right
     let mid = left+((right-left)>>1);
     if(space[mid]>target) right = mid;
     if(space[mid]<=target) left = mid+1;
   }
-  // space[left] here is the minimum value that greater than target
-  if(left===space.length) return null;
+  // space[left] is the last value and less and equal than target
+  if(space[left]<=target) return null
   return space[left];
 }
