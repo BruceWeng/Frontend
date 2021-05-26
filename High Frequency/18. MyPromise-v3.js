@@ -36,6 +36,9 @@ class MyPromise {
   handlers = [];
 
   constructor(executor) {
+    // this.resolve and this.reject are assigned to executor. 
+    // In the scope of executor, 'this' is no longer bind to MyPromise scope.
+    // We have to bind MyPromise scope 'this' to this.resolve and this.reject.
     this.resolve = this.resolve.bind(this);
     this.reject = this.reject.bind(this);
     try {
@@ -68,7 +71,7 @@ class MyPromise {
       if (type === this.TYPE.CATCH) {
         this.fail(onFailed);
         // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
-        if (this.state = this.STATE.SUCCEEDED) {
+        if (this.state === this.STATE.SUCCEEDED) {
           return this.resolve(this.value);
         }
       }
@@ -85,6 +88,8 @@ class MyPromise {
  * 2. bind current promise to next promise fn.
  * 
  * functions: succeed(onSucceeded: Function), fail(onFailed: Function), chainPromise(promise: MyPromise)
+ * 
+ * These functions are not passed into different scopes, therefore, we don't need to bind 'this' to them.
  */
 class MyPromise {
   // State machine
@@ -142,7 +147,7 @@ class MyPromise {
       if (type === this.TYPE.CATCH) {
         this.fail(onFailed);
         // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
-        if (this.state = this.STATE.SUCCEEDED) {
+        if (this.state === this.STATE.SUCCEEDED) {
           return this.resolve(this.value);
         }
       }
@@ -267,7 +272,7 @@ class MyPromise {
       if (type === this.TYPE.CATCH) {
         this.fail(onFailed);
         // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
-        if (this.state = this.STATE.SUCCEEDED) {
+        if (this.state === this.STATE.SUCCEEDED) {
           return this.resolve(this.value);
         }
       }
@@ -395,25 +400,28 @@ class MyPromise {
     }
   }
 
+  // Producer
   resolve(value) {
     this.resolve = () => null;
     this.state = this.STATE.SUCCEEDED;
     this.value = value;
     for (const { type, onSucceeded, onFailed } of this.handlers) {
       if (type === this.TYPE.THEN) this.succeed(onSucceeded);
+      // if error is thrown in 'then'(state is FAILED), produce reject with the value
       if (type === this.TYPE.THEN && this.state === this.STATE.FAILED) 
         return this.reject(this.value);
     }
     this.handlers.length = 0;
   }
 
+  // Producer
   reject(reason) {
     this.reject = () => null;
     this.state = this.STATE.FAILED;
     this.value = reason;
     for (const { type, onSucceeded, onFailed } of this.handlers) {
       if (type === this.TYPE.CATCH) this.fail(onFailed);
-      // if (reason is catched) state is able to set to be SUCCEEDED and chain to next 'then'
+      // if (reason is catched) state is able to set to be SUCCEEDED, produce resolve with the value
       if (type === this.TYPE.CATCH && this.state === this.STATE.SUCCEEDED) 
         return this.resolve(this.value);
     }
@@ -463,6 +471,7 @@ class MyPromise {
     }
   }
 
+  // Consumer
   then(onSucceeded, onFailed) {
     queueMicrotask(() => {
       switch (this.state) {
@@ -483,6 +492,7 @@ class MyPromise {
     return this;
   }
 
+  // Consumer
   catch(onFailed) {
     queueMicrotask(() => {
       switch (this.state) {
@@ -507,6 +517,7 @@ class MyPromise {
     return new MyPromise((_, reject) => reject(reason));
   }
 
+  // Consumer
   finally(onFinally) {
     const Promise = this.constructor;
     return Promise.then(
