@@ -1,6 +1,6 @@
 class EventEmitter {
   subscribers = {}; // <key: eventName, value: callbacks[]>
-  subscribe(eventName, callback) {
+  subscribe(eventName, callback) { // Consumer
   	this.subscribers[eventName] = this.subscribers[eventName] || [];
     this.subscribers[eventName].push(callback);
     const index = this.subscribers.length-1;
@@ -12,7 +12,7 @@ class EventEmitter {
     }
   }
   
-  emit(eventName, ...args) {
+  emit(eventName, ...args) { // Producer
   	const callbacks = this.subscribers[eventName];
     for(const callback of callbacks) {
       callback(...args);
