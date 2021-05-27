@@ -104,10 +104,13 @@ class MyPromise {
   static resolve(value) {
     return (value instanceof MyPromise) 
       ? value 
-      : new MyPromise((resolve) => resolve(value))
+      : new MyPromise((resolve, _) => resolve(value))
   }
 
   static reject(value) {
     return new MyPromise((_, reject) => reject(value))
   }
 }
+
+// Check typeof input as function in 'then'
+// Check typeof input as MyPromise in _resolve, _reject and resolve
