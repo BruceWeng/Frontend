@@ -2,6 +2,7 @@ import './App.css';
 import {useEffect, useReducer} from 'react';
 
 function useCarousel() {
+  // initial state: {isLoading: false, images: [], selected_idx: 0}
   const ACTIONS = {
     IMAGES_ISLOADING: 'images-isloading',
     IMAGES_INITIALIZED: 'images-initialized',
