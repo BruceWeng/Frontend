@@ -1,0 +1,13 @@
+html {
+  size: 12px;
+  padding: 0;
+  margin: 0;
+}
+.App {
+}
+
+.Bar {
+  height: 1rem;
+  background-color: hsl(200, 100, 50);
+  border: solid black 2px;
+}
