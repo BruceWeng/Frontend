@@ -1,7 +1,7 @@
 import './App.css';
 import {useEffect, useReducer} from 'react';
 
-function App() {
+function useCarousel() {
   const ACTIONS = {
     IMAGES_ISLOADING: 'images-isloading',
     IMAGES_INITIALIZED: 'images-initialized',
@@ -47,6 +47,26 @@ function App() {
     }
   }
   const [slide, dispatch] = useReducer(reducer, {isLoading: false, images: [], selected_idx: 0})
+  async function fetchImages() {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/photos?_start=0&_limit=10')
+      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
+      const json = await response.json()
+      dispatch({type: ACTIONS.IMAGES_INITIALIZED, payload: {images: json}})
+    } catch(error) {
+      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
+      console.error(`Image fetching failed: ${error}`) 
+    }
+  }
+  useEffect(() => {
+    dispatch({type: ACTIONS.IMAGES_ISLOADING, payload:{isLoading: true}})
+    fetchImages()
+  }, [])
+  return [slide, dispatch, ACTIONS]
+}
+
+function App() {
+  const [slide, dispatch, ACTIONS] = useCarousel()
   const handleBtnPrevClick = () => {
     dispatch({type: ACTIONS.SLIDE_INDEX_DECREASED, payload: {selected_idx: slide.selected_idx}})
   }
@@ -56,19 +76,7 @@ function App() {
   const handleDotClick = (idx) => {
     dispatch({type: ACTIONS.SLIDE_INDEX_SELECTED, payload: {selected_idx: idx}})
   }
-  useEffect(() => {
-    dispatch({type: ACTIONS.IMAGES_ISLOADING, payload:{isLoading: true}})
-    fetch('https://jsonplaceholder.typicode.com/photos?_start=0&_limit=10')
-    .then(response => {
-      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
-      return response.json()
-    })
-    .then(json => dispatch({type: ACTIONS.IMAGES_INITIALIZED, payload: {images: json}}))
-    .catch(reason => {
-      dispatch({type: ACTIONS.IMAGES_ISLOADING, payload: {isLoading: false}})
-      console.error(`Image fetching failed: ${reason}`)
-    })
-  }, [])
+
   return (
     <div className="App">
       <div className="Carousel__slide-list-container">
