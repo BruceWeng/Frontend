@@ -75,7 +75,7 @@
 | 2 | Calendar                                     | &check; | &check; |     &check;   |   @TODO    |   @TODO   |
 | 3 | Tic Tac Toe Game                             |  @TODO  | &check; |     @TODO     |   @TODO    |   @TODO   |
 | 4 | Star rating                                  |    -    |    -    |       -       |     -      |   @TODO   |
-| 5 | Poll                                         |  @TODO  |  @TODO  |     @TODO     |   &check;  |   @TODO   |
+| 5 | Poll                                         |  @TODO  | &check; |     @TODO     |   &check;  |   @TODO   |
 | 6 | Light box                                    |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 | 7 | Click outside to close drop down             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 | 8 | Accordion                                    |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
