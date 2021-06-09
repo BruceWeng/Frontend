@@ -1,4 +1,4 @@
-class Q {
+class Queue {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -29,7 +29,7 @@ class Q {
   }
 }
 
-const queue = new Q();
+const queue = new Queue();
 queue.enqueue(1);
 queue.enqueue(2);
 console.log(queue.size); // 2
