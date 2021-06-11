@@ -12,12 +12,14 @@ class Graph {
      */
     this.vertexesCount = 0
     this.edgesCount = 0
+    this.states = {}
   }
 
   addVertex(key, value) {
     this.vertexes[key] = value
     if(!(key in this.edges)) this.edges[key] = {}
     this.vertexesCount++
+    this.states[key] = 'UNVISITED'
     return this
   }
 
@@ -46,6 +48,7 @@ class Graph {
   removeVertex(key) {
     if(!(key in this.vertexes)) return null
     delete this.vertexes[key]
+    delete this.states[key]
     // remove edge for graph
     for(let destKey in this.edges[key]) {
       this.removeEdge(destKey, key)
@@ -128,6 +131,29 @@ class Graph {
         }
         size--
       }
+    }
+  }
+
+  hasCycle(srcKey, states={...this.states}, parentKey=srcKey) {
+    if(this.isDirected) {
+      if(states[srcKey]==='NO_CYCLE') return false
+      if(states[srcKey]==='CYCLE') return true
+      states[srcKey] = 'CYCLE'
+      if(srcKey in this.edges) {
+        for(let destKey in this.edges[srcKey]) {
+          if(this.hasCycle(destKey, states)) return true
+        }
+      }
+      states[srcKey] = 'NO_CYCLE'
+      return false
+    }
+    else {
+      states[srcKey] = 'VISITED'
+      for(let destKey in this.edges[srcKey]) {
+        if(states[destKey]==='VISITED' && destKey!==parentKey) return true
+        if(states[destKey]==='UNVISITED' && this.hasCycle(destKey, states, srcKey)) return true
+      }
+      return false
     }
   }
 
@@ -217,3 +243,7 @@ console.log('shortest path')
 console.log(directedGraph.vertexes)
 console.log(directedGraph.edges)
 console.log(directedGraph.shortestPath('v1'))
+console.log(graph.states)
+console.log(graph.hasCycle('v1')) // true
+console.log(directedGraph.states)
+console.log(directedGraph.hasCycle('v1')) // false
