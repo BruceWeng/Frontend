@@ -72,7 +72,7 @@ function TodoContainer() {
         }
       }
     })
-    setSearchInput(() => '')
+    setSearchInput('')
   }
 
   const handleTodoSaveClick = (item) => {
@@ -102,9 +102,9 @@ function TodoContainer() {
   return (
     <div className="Todo__container">
       <div className="Todo__post-input">
-        <form id="todo-form">
+        <form id="todo-form" onSubmit={handleInputBtnSubmit}>
           <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)}></input>
-          <button type="submit" onClick={(e) => handleInputBtnSubmit(e)}>Submit</button> 
+          <input type="submit" value='Submit'/>
         </form>
       </div>
       <div className="Todo__items">
