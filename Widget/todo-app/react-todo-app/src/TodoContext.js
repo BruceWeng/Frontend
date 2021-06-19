@@ -6,23 +6,59 @@ export const ACTIONS = {
   TODO_UPDATED: 'TODO-UPDATED',
   TODO_DELETED: 'TODO-DELETED',
 }
+
+async function postTodos(action) {
+  const response = await fetch('http://localhost:5000/todos', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(action.payload.item)
+  })
+  console.log(response)
+  try {
+    if (response.ok) console.log('post todo successed')
+    const data =  await response.json()
+    console.log({data})
+  } catch(e) {
+    console.error(`post todo failed: ${e}`)
+  }
+}
+
+async function updateTodo(action) {
+  const response = await fetch(`http://localhost:5000/todos/${action.payload.item.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(action.payload.item)
+  })
+  try {
+    if (response.ok) console.log('put todo successed')
+    const data = await response.json()
+    console.log({data})
+  } catch(e) {
+    console.error(`put todo failed: ${e}`)
+  }
+ }
+
+async function deleteTodo(action) {
+  const response = await fetch(`http://localhost:5000/todos/${action.payload.item.id}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'}
+  })
+  try {
+    if (response.ok) console.log('delete todo successed')
+    const data = await response.json()
+    console.log({data})
+  } catch(e) {
+    console.error(`delete todo failed: ${e}`)
+  }
+}
+
 export const TodoContext = React.createContext();
 export function TodoProvider({ children }) {
   function reducer(todo, action) {
     switch (action.type) {
       case ACTIONS.TODO_ADDED: {
         console.log('ACTIONS.TODO_ADDED')
-        fetch('http://localhost:5000/todos', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(action.payload.item)
-        })
-        .then(response => {
-          if (response.ok) console.log('post todo successed')
-          else throw new Error(`${response.status} (${response.statusText})`)
-        })
-        .catch(reason => console.error(`post todo failed: ${reason}`))
-
+        postTodos(action)
         const new_items = [...todo.items, action.payload.item]
         return {
           ...todo,
@@ -32,16 +68,7 @@ export function TodoProvider({ children }) {
       case ACTIONS.TODO_UPDATED: {
         console.log('ACTIONS.TODO_UPDATED')
         const new_items = [...todo.items]
-        fetch(`http://localhost:5000/todos/${action.payload.item.id}`, {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(action.payload.item)
-        })
-        .then(response => {
-          if (response.ok) console.log('put todo successed')
-          else throw new Error(`${response.status} (${response.statusText})`)
-        })
-        .catch(reason => console.error(`put todo failed: ${reason}`))
+        updateTodo(action)
         return {
           ...todo,
           items: new_items.map((item) => {
@@ -54,15 +81,7 @@ export function TodoProvider({ children }) {
       }
       case ACTIONS.TODO_DELETED: {
         console.log('ACTIONS.TODO_DELETED')
-        fetch(`http://localhost:5000/todos/${action.payload.item.id}`, {
-          method: 'DELETE',
-          headers: {'Content-Type': 'application/json'}
-        })
-        .then(response => {
-          if (response.ok) console.log('delete todo successed')
-          else throw new Error(`${response.status} (${response.statusText})`)
-        })
-        .catch(reason => console.error(`delete todo failed: ${reason}`))
+        deleteTodo(action)
         return {
           ...todo,
           items: todo.items.filter((item) => item.id !== action.payload.item.id)
