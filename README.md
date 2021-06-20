@@ -89,7 +89,7 @@
 | 14.c | Infinite scroller                         |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 | 14.d | File uploader                             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 | 14.e | Pagination                                |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
-| 14.f | Autocompolete                             |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
+| 14.f | Autocompcdlete                            |  @TODO  | &check; |     @TODO     |   @TODO    |   @TODO   |
 | 14.g | Fuzzy search                              |  @TODO  |  @TODO  |     @TODO     |   @TODO    |   @TODO   |
 
 ## Part 3: Performance
