@@ -21,8 +21,8 @@
     function incrementCount(count) {
       console.log(counter+=count);
     }
-    incrementCount = debounce(incrementCount, 500);
-    window.addEventListener('scroll', () => incrementCount(2));
+    incrementDebounce = debounce(incrementCount, 500);
+    window.addEventListener('scroll', () => incrementDebounce(2));
 
     /**
      * @param {Function} func
@@ -30,9 +30,9 @@
      */
     function debounce(func, wait) {
       let timer;
-      return (...args) => {
+      return (...args) => { // maintain original func params
         clearTimeout(timer); // reset timer if next event fires before current timer finishes
-        timer = setTimeout(() => func(...args), wait);
+        timer = setTimeout(() => func(...args), wait); // remember to reassign timer
       }
     }
   </script>
