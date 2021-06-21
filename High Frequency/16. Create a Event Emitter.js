@@ -1,19 +1,20 @@
 class EventEmitter {
   subscribers = {}; // <key: eventName, value: callbacks[]>
+  id = 0;
   subscribe(eventName, callback) { // Consumer
-  	this.subscribers[eventName] = this.subscribers[eventName] || [];
-    this.subscribers[eventName].push(callback);
-    const index = this.subscribers.length-1;
+    const callback_key = this.id++;
+  	this.subscribers[eventName] = this.subscribers[eventName] || {};
+    this.subscribers[eventName][callback_key] = callback;
     const EventEmitter = this;
     return {
       release() {
-        EventEmitter.subscribers[eventName].splice(index, 1);
+        delete EventEmitter.subscribers[eventName][callback_key];
       }
     }
   }
   
   emit(eventName, ...args) { // Producer
-  	const callbacks = this.subscribers[eventName];
+  	const callbacks = Object.values(this.subscribers[eventName]);
     for(const callback of callbacks) {
       callback(...args);
     }
