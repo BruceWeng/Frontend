@@ -22,8 +22,8 @@
     let log = (count) => {
       console.log(counter+=count);
     }
-    log = throttle(log, 1000);
-    button.addEventListener('click', () => log(2));
+    const logThrottle = throttle(log, 1000);
+    button.addEventListener('click', () => logThrottle(2));
     
     /**
      * @param {Function} func
