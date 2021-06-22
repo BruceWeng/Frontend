@@ -6,6 +6,13 @@ class MyPromise {
   }
   constructor(executor) {
     this.state = this.STATE.PENDING
+    // set result = value in _resolve or _reject
+    this.result = null
+    // function initialized in .then()
+    this.onFulfilled = null
+    this.onRejected = null
+    this.thenResolve = null
+    this.thenReject = null
     try {
       executor(this._resolve.bind(this), this._reject.bind(this))
     } catch (error) {
@@ -15,7 +22,8 @@ class MyPromise {
 
   // Consumer
   // Define class level variable in then: 
-  // onFulfilled, onRejected, thenResolve, thenReject
+  // 1. update onFulfilled, onRejected
+  // 2. set thenResolve, thenReject for next Promise
   then(onFulfilled, onRejected) {
     // Register consuming functions.
     // assign a callback return value to class variable if onFulfilled is not a function
@@ -51,22 +59,20 @@ class MyPromise {
     )
   }
 
-  // Producer
+  // Producer: only be used in executor
   _resolve(value) {
     // only handle pending promise
     if (this.state !== this.STATE.PENDING) return
     // change state and result
     this.state = this.STATE.FULFILLED
     this.result = value
-    // in _resolve: returnValue is this.onFulfilled(this.result)
-    // in queueMicrotask: 
-    // in try:
-    // if returnValue is a promise, assign thenResolve and thenReject to returnValue.then()
-    // else this.thenResolve(returnValue)
-    // in catch (error):
-    // this.thenReject(error)
+    // In micro task queue:
+    // 0. get returnValue from this.onFulfilled(value)
+    // 1. returnValue.then(this.thenResolve, this.thenReject)
+    // or 2. this.thenResolve(returnValue)
+    // or 3. this.thenReject(e)
     queueMicrotask(() => {
-      if (this.onFulfilled === undefined) return
+      if (this.onFulfilled===null) return
       try {
         const returnValue = this.onFulfilled(this.result)
         if (returnValue instanceof MyPromise) {
@@ -80,14 +86,14 @@ class MyPromise {
     });
   }
 
-  // Producer
+  // Producer: only be used in executor
   // only 3 lines different from _resolve
   _reject(value) {
     if (this.state !== this.STATE.PENDING) return
     this.state = this.STATE.REJECTED // (1)
     this.result = value
     queueMicrotask(() => {
-      if (this.onRejected === undefined) return // (2)
+      if (this.onRejected===null) return // (2)
       try {
         const returnValue = this.onRejected(this.result) // (3)
         if (returnValue instanceof MyPromise) {
