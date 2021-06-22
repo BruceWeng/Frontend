@@ -68,7 +68,7 @@ class LRUCache {
     const last = this.tail.prev;
     last.prev.next = this.tail;
     this.tail.prev = last.prev;
-    delete this.map[last.key];
+    delete this.map[last.key]; // ListNode.key is needed HERE
   }
 }
 
